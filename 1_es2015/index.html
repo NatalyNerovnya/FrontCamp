@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>News</title>
+	<link href="app.css" rel="stylesheet">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="apiData.js"></script>
+	<script src="script.js"></script>
+</head>
+
+<body>
+<div class="content">
+
+	<div class="logo site">
+		<h1>News</h1>
+		<h5>made with <a href="https://newsapi.org/" target="_blank">newsapi</a></h5>
+	</div>
+
+	<div class="nav">
+		<div class="dropdown">
+		  <button onclick="clickDropdown('source-filter')" class="dropbtn">Source filter</button>
+		  <div id="source-filter" class="dropdown-content"></div>
+		</div>
+		</div>
+	</div>
+
+	<div id="news-content">	</div>
+</div>
+
+
+</body>
+</html>

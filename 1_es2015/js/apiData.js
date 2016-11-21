@@ -11,7 +11,7 @@ function getData(connectionString){
 
  	getData(requestArticlstr)
 	 .then(data => {
-	 	let newsContentArr = `<h3>${data.source}</h3>`;
+	 	let newsContentArr = `<h3 id="paperName">${data.source.toUpperCase()}</h3>`;
 
 	    for (let {author, description, publishedAt, title, url, urlToImage} of data.articles) {
 	  	newsContentArr = `${newsContentArr} \ <div class="news"> \<img class="news-img"src="${urlToImage}"/>

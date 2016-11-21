@@ -1,3 +1,7 @@
+body{
+	background-color: #f9fdff;
+}
+
 .content .logo.site{
 	background-color: #ddfcff;
 	margin: 20px;
@@ -20,8 +24,6 @@ h5{
 	font-size: 600%;
 }
 
-//.dropdown { padding: 20% 0 0 10%;}
-
 a{
 	text-decoration: none;
 	color: #00b1c1;
@@ -34,6 +36,7 @@ a:visited{
 	border: solid #00b1c1 3px;
 	border-radius: 5%;
 	margin: 20px;
+	background-color: white;
 	float: right;
 }
 
@@ -74,14 +77,20 @@ a:visited{
 	border: solid #00b1c1 1px;
 	border-radius: 2%;
 	overflow:auto;
+	background-color: white;
 }
 
 .logo.news-content{
 	padding: 0 3px 0 3px;
 }
 
+.logo.news-content a{
+	font-size: 170%;
+}
+
 .news-text{
 	padding: 0 4px 0 4px;
+	font-size: 115%;
 }
 
 
@@ -96,14 +105,21 @@ a:visited{
 	clear: both;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 400px) {
+#news-content h3{
+	font-size: 270%;
+	margin-top: 0px;
+	margin-left: 7%;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 415px) {
 h1{ font-size:300%;}
 .nav{ width: 80%; display: inline; border: none; clear: both;}
 .dropdown { display: inline; margin:5%;}
 .dropbtn{ height: 30px; width: 30%;}
+#news-content{ width: 90%;}
 }
 
-@media only screen and (min-width: 401px) and (max-width: 800px) {
+@media only screen and (min-width: 416px) and (max-width: 800px) {
 .nav{ height: 70px; width: 15%;}
 .dropdown { padding: 20% 0 0 10%;}
 } 

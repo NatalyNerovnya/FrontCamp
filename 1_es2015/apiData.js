@@ -14,9 +14,9 @@ function getData(connectionString){
 	 	let newsContentArr = `<h3>${data.source}</h3>`;
 
 	    for (let {author, description, publishedAt, title, url, urlToImage} of data.articles) {
-	  	newsContentArr = `${newsContentArr} \ <div class="news"> \
+	  	newsContentArr = `${newsContentArr} \ <div class="news"> \<img class="news-img"src="${urlToImage}"/>
 			<div class="logo news-content"><a href="${url}" target="_blank">${title}</a></div>\
-			<p class="news-text">${description}</p> \ </div>`;}
+			<p class="news-text">${description}</p> \ </div> <div class="clear"></div>`;}
 		document.getElementById("news-content").innerHTML = newsContentArr;
 	 })
  	.catch(error => console.log('error: ' + error));

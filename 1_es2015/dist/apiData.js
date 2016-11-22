@@ -1,18 +1,33 @@
 "use strict";
 
-var api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function getData(connectionString) {
-	return fetch(connectionString, { method: 'GET' }).then(function (response) {
-		return response.json();
-	});
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var API = "5fb7dea8d7f440b1af9b7cd7cba9640d";
+
+var apiWrapper = function () {
+	function apiWrapper() {
+		_classCallCheck(this, apiWrapper);
+	}
+
+	_createClass(apiWrapper, null, [{
+		key: "getData",
+		value: function getData(connectionString) {
+			return fetch(connectionString, { method: 'GET' }).then(function (response) {
+				return response.json();
+			});
+		}
+	}]);
+
+	return apiWrapper;
+}();
 
 function getArticles(source) {
 	clearNewsContent();
-	var requestArticlstr = "https://newsapi.org/v1/articles?source=" + source + "&apiKey=" + api;
+	var requestArticlstr = "https://newsapi.org/v1/articles?source=" + source + "&apiKey=" + API;
 
-	getData(requestArticlstr).then(function (data) {
+	apiWrapper.getData(requestArticlstr).then(function (data) {
 		var newsContentArr = "<h3 id=\"paperName\">" + data.source.toUpperCase() + "</h3>";
 
 		var _iteratorNormalCompletion = true;
@@ -63,7 +78,7 @@ function getArticles(source) {
 };
 
 function setSources() {
-	getData(" https://newsapi.org/v1/sources?language=en").then(function (data) {
+	apiWrapper.getData(" https://newsapi.org/v1/sources?language=en").then(function (data) {
 		var array = [];
 
 		var _iteratorNormalCompletion2 = true;
@@ -111,5 +126,9 @@ function clearNewsContent() {
 		elem.removeChild(elem.lastChild);
 	}
 };
+
+function clickDropdown(id) {
+	document.getElementById(id).classList.toggle("show");
+}
 
 setSources();

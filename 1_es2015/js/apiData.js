@@ -1,14 +1,20 @@
-let api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
+const API = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
-function getData(connectionString){
+class apiWrapper{
+	static getData(connectionString){
 	return fetch(connectionString, {method: 'GET'}).then(response => response.json());
-};
+	};
+}
+
+
+
+
 
  function getArticles(source){
  	clearNewsContent();
- 	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${api}`;
+ 	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
 
- 	getData(requestArticlstr)
+ 	apiWrapper.getData(requestArticlstr)
 	 .then(data => {
 	 	let newsContentArr = `<h3 id="paperName">${data.source.toUpperCase()}</h3>`;
 
@@ -32,7 +38,7 @@ function getData(connectionString){
  };
 
   function setSources(){
- 	getData(" https://newsapi.org/v1/sources?language=en")
+ 	apiWrapper.getData(" https://newsapi.org/v1/sources?language=en")
 	 .then(data => {
 	 	let array = [];
 
@@ -57,5 +63,9 @@ function clearNewsContent(){
 	while (elem.hasChildNodes()) {
     elem.removeChild(elem.lastChild);
 }};
+
+function clickDropdown(id) {  
+    document.getElementById(id).classList.toggle("show");
+}
 
 setSources();

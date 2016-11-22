@@ -3,8 +3,7 @@
 var api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
 function getData(connectionString) {
-	var request = new Request(connectionString);
-	return fetch(request, { method: 'GET' }).then(function (response) {
+	return fetch(connectionString, { method: 'GET' }).then(function (response) {
 		return response.json();
 	});
 };
@@ -51,6 +50,16 @@ function getArticles(source) {
 	}).catch(function (error) {
 		return console.log('error: ' + error);
 	});
+
+	var dropdowns = document.getElementsByClassName("dropdown-content");
+	var i;
+	for (i = 0; i < dropdowns.length; i++) {
+		var openDropdown = dropdowns[i];
+
+		if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		}
+	}
 };
 
 function setSources() {

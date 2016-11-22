@@ -1,8 +1,7 @@
 let api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
 function getData(connectionString){
-	let request = new Request(connectionString);
-	return fetch(request, {method: 'GET'}).then(response => response.json());
+	return fetch(connectionString, {method: 'GET'}).then(response => response.json());
 };
 
  function getArticles(source){
@@ -20,6 +19,16 @@ function getData(connectionString){
 		document.getElementById("news-content").innerHTML = newsContentArr;
 	 })
  	.catch(error => console.log('error: ' + error));
+
+ 	var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
  };
 
   function setSources(){

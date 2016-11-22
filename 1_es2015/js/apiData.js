@@ -7,9 +7,6 @@ class apiWrapper{
 }
 
 
-
-
-
  function getArticles(source){
  	clearNewsContent();
  	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
@@ -25,16 +22,7 @@ class apiWrapper{
 		document.getElementById("news-content").innerHTML = newsContentArr;
 	 })
  	.catch(error => console.log('error: ' + error));
-
- 	var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
+ 	hideDropdownList();
  };
 
   function setSources(){
@@ -60,12 +48,23 @@ class apiWrapper{
 
 function clearNewsContent(){
 	let elem = document.getElementById("news-content");
-	while (elem.hasChildNodes()) {
-    elem.removeChild(elem.lastChild);
-}};
+	elem.innerHTML = '';
+};
 
 function clickDropdown(id) {  
     document.getElementById(id).classList.toggle("show");
+}
+
+function hideDropdownList(){
+	var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
 }
 
 setSources();

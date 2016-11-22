@@ -1,48 +1,103 @@
-let api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
+"use strict";
+
+var api = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
 function getData(connectionString) {
-	let request = new Request(connectionString);
-	return fetch(request, { method: 'GET' }).then(response => response.json());
+	var request = new Request(connectionString);
+	return fetch(request, { method: 'GET' }).then(function (response) {
+		return response.json();
+	});
 };
 
 function getArticles(source) {
 	clearNewsContent();
-	let requestArticlstr = `https://newsapi.org/v1/articles?source=${ source }&apiKey=${ api }`;
+	var requestArticlstr = "https://newsapi.org/v1/articles?source=" + source + "&apiKey=" + api;
 
-	getData(requestArticlstr).then(data => {
-		let newsContentArr = `<h3>${ data.source }</h3>`;
+	getData(requestArticlstr).then(function (data) {
+		var newsContentArr = "<h3 id=\"paperName\">" + data.source.toUpperCase() + "</h3>";
 
-		for (let { author, description, publishedAt, title, url, urlToImage } of data.articles) {
-			newsContentArr = `${ newsContentArr } \ <div class="news"> \<img class="news-img"src="${ urlToImage }"/>
-			<div class="logo news-content"><a href="${ url }" target="_blank">${ title }</a></div>\
-			<p class="news-text">${ description }</p> \ </div> <div class="clear"></div>`;
+		var _iteratorNormalCompletion = true;
+		var _didIteratorError = false;
+		var _iteratorError = undefined;
+
+		try {
+			for (var _iterator = data.articles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+				var _step$value = _step.value,
+				    author = _step$value.author,
+				    description = _step$value.description,
+				    publishedAt = _step$value.publishedAt,
+				    title = _step$value.title,
+				    url = _step$value.url,
+				    urlToImage = _step$value.urlToImage;
+
+				newsContentArr = newsContentArr + "  <div class=\"news\"> <img class=\"news-img\"src=\"" + urlToImage + "\"/>\n\t\t\t<div class=\"logo news-content\"><a href=\"" + url + "\" target=\"_blank\">" + title + "</a></div>\t\t\t<p class=\"news-text\">" + description + "</p>  </div> <div class=\"clear\"></div>";
+			}
+		} catch (err) {
+			_didIteratorError = true;
+			_iteratorError = err;
+		} finally {
+			try {
+				if (!_iteratorNormalCompletion && _iterator.return) {
+					_iterator.return();
+				}
+			} finally {
+				if (_didIteratorError) {
+					throw _iteratorError;
+				}
+			}
 		}
+
 		document.getElementById("news-content").innerHTML = newsContentArr;
-	}).catch(error => console.log('error: ' + error));
+	}).catch(function (error) {
+		return console.log('error: ' + error);
+	});
 };
 
 function setSources() {
-	getData(" https://newsapi.org/v1/sources?language=en").then(data => {
-		let array = [];
+	getData(" https://newsapi.org/v1/sources?language=en").then(function (data) {
+		var array = [];
 
-		for (let { id } of data.sources) {
-			array.push(id);
+		var _iteratorNormalCompletion2 = true;
+		var _didIteratorError2 = false;
+		var _iteratorError2 = undefined;
+
+		try {
+			for (var _iterator2 = data.sources[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+				var id = _step2.value.id;
+
+				array.push(id);
+			}
+		} catch (err) {
+			_didIteratorError2 = true;
+			_iteratorError2 = err;
+		} finally {
+			try {
+				if (!_iteratorNormalCompletion2 && _iterator2.return) {
+					_iterator2.return();
+				}
+			} finally {
+				if (_didIteratorError2) {
+					throw _iteratorError2;
+				}
+			}
 		}
 
 		return new Set(array);
-	}).then(arr => {
+	}).then(function (arr) {
 		var refArr = '';
 
-		arr.forEach(c => {
-			refArr = `${ refArr }\ <a href="#" onclick="getArticles('${ c }')"id=${ c }>${ c }</a>`;
+		arr.forEach(function (c) {
+			refArr = refArr + " <a href=\"#\" onclick=\"getArticles('" + c + "')\"id=" + c + ">" + c + "</a>";
 		});
 
 		document.getElementById("source-filter").innerHTML = refArr;
-	}).catch(error => console.log('error: ' + error));
+	}).catch(function (error) {
+		return console.log('error: ' + error);
+	});
 };
 
 function clearNewsContent() {
-	let elem = document.getElementById("news-content");
+	var elem = document.getElementById("news-content");
 	while (elem.hasChildNodes()) {
 		elem.removeChild(elem.lastChild);
 	}

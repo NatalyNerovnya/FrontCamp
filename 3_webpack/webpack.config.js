@@ -1,5 +1,5 @@
 module.exports = {
-    entry: "./js/sources",
+    entry: ["./js/events", "./js/sources"],
     output: {
         path: __dirname + "/dist",
         filename: "build.js"
@@ -8,7 +8,8 @@ module.exports = {
 	  loaders: [
 		{
 		  test: /\.js$/,
-		  loader: 'babel',		}
+		  loader: 'babel',	
+		  }
 	  ]
-}
+	}
 }

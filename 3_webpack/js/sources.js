@@ -2,7 +2,7 @@ import { apiWrapper } from './apiData';
 import { API } from './variables';
 import {clearNewsContent, hideDropdownList} from './newsContent';
 
- window.function getArticles(source){
+function getArticles(source){
  	clearNewsContent();
  	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
 

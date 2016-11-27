@@ -27,12 +27,14 @@ module.exports = {
 			warnings: false,
 			drop_console: true,
 			unsafe: true
-		}})
+		}}),
+		new webpack.DefinePlugin({DEBUG: true})
 		],
 	devServer: {
 		host: 'localhost',
 		port: 9081
 	}
 };
+
 
 

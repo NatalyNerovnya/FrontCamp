@@ -45,3 +45,10 @@ function getArticles(source){
  };
 
  setSources();
+
+ if(DEBUG){
+	alert("debug mode");
+}
+if(PRODUCTION){
+	console.log("Production");
+}

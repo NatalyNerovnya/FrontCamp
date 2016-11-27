@@ -1,5 +1,5 @@
 module.exports = {
-    entry: ["./js/events", "./js/sources"],
+    entry: "./js/sources",
     output: {
         path: __dirname + "/dist",
         filename: "build.js",

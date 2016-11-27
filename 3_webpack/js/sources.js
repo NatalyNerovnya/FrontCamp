@@ -1,6 +1,9 @@
 import { apiWrapper } from './apiData';
 import { API } from './variables';
 import {clearNewsContent, hideDropdownList} from './newsContent';
+import {clickDropdown} from './events.js';
+exports.clickDropdown = clickDropdown;
+exports.getArticles = getArticles;
 
 function getArticles(source){
  	clearNewsContent();
@@ -33,7 +36,7 @@ function getArticles(source){
 	 	var refArr = '';
 
 	 	arr.forEach(c => {
-	 		refArr = `${refArr}\ <a href="#" onclick="getArticles('${c}')"id=${c}>${c}</a>`
+	 		refArr = `${refArr}\ <a href="#" onclick="home.getArticles('${c}')"id=${c}>${c}</a>`
 	 	})
 
 	 	document.getElementById("source-filter").innerHTML = refArr;})

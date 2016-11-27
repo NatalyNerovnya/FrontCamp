@@ -45,33 +45,18 @@ var home =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(1);
-	module.exports = __webpack_require__(2);
-
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	var clickDropdown = function clickDropdown(id) {
-	  return document.getElementById(id).classList.toggle("show");
-	};
-
-	exports.clickDropdown = clickDropdown;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
-	var _apiData = __webpack_require__(3);
+	var _apiData = __webpack_require__(1);
 
-	var _variables = __webpack_require__(4);
+	var _variables = __webpack_require__(2);
 
-	var _newsContent = __webpack_require__(5);
+	var _newsContent = __webpack_require__(3);
+
+	var _events = __webpack_require__(4);
+
+	exports.clickDropdown = _events.clickDropdown;
+	exports.getArticles = getArticles;
 
 	function getArticles(source) {
 		(0, _newsContent.clearNewsContent)();
@@ -152,7 +137,7 @@ var home =
 			var refArr = '';
 
 			arr.forEach(function (c) {
-				refArr = refArr + ' <a href="#" onclick="getArticles(\'' + c + '\')"id=' + c + '>' + c + '</a>';
+				refArr = refArr + ' <a href="#" onclick="home.getArticles(\'' + c + '\')"id=' + c + '>' + c + '</a>';
 			});
 
 			document.getElementById("source-filter").innerHTML = refArr;
@@ -164,7 +149,7 @@ var home =
 	setSources();
 
 /***/ },
-/* 3 */
+/* 1 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -195,7 +180,7 @@ var home =
 	}();
 
 /***/ },
-/* 4 */
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -206,7 +191,7 @@ var home =
 	var API = exports.API = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
 /***/ },
-/* 5 */
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -232,6 +217,19 @@ var home =
 	    }
 	  }
 	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var clickDropdown = exports.clickDropdown = function clickDropdown(id) {
+	  return document.getElementById(id).classList.toggle("show");
+	};
 
 /***/ }
 /******/ ]);

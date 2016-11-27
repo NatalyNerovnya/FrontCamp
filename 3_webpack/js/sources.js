@@ -4,6 +4,7 @@ import {clearNewsContent, hideDropdownList} from './newsContent';
 import {clickDropdown} from './events.js';
 exports.clickDropdown = clickDropdown;
 exports.getArticles = getArticles;
+require("../css/app.less");
 
 function getArticles(source){
  	clearNewsContent();

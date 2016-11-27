@@ -20,7 +20,8 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webpack-browser-plugin": "^1.0.12"
   },
   "author": "",
   "license": "ISC"

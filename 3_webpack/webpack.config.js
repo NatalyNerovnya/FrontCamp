@@ -1,3 +1,6 @@
+var webpack = require('webpack');
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
+
 module.exports = {
     entry: "./js/sources",
     output: {
@@ -16,5 +19,20 @@ module.exports = {
 			  test: /\.less$/
 			  }
 	  ]
+	},
+	plugins: [ 
+		new WebpackBrowserPlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+		compress: {
+			warnings: false,
+			drop_console: true,
+			unsafe: true
+		}})
+		],
+	devServer: {
+		host: 'localhost',
+		port: 9081
 	}
-}
+};
+
+

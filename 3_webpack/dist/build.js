@@ -1,3 +1,4 @@
+var home =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -54,9 +55,11 @@
 
 	"use strict";
 
-	function clickDropdown(id) {
-	    document.getElementById(id).classList.toggle("show");
-	}
+	var clickDropdown = function clickDropdown(id) {
+	  return document.getElementById(id).classList.toggle("show");
+	};
+
+	exports.clickDropdown = clickDropdown;
 
 /***/ },
 /* 2 */

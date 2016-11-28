@@ -10,6 +10,8 @@ export function getArticles(source){
  	clearNewsContent();
  	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
 
+ 	require("../css/news.less");
+
  	apiWrapper.getData(requestArticlstr)
 	 .then(data => {
 	 	let newsContentArr = `<h3 id="paperName">${data.source.toUpperCase()}</h3>`;

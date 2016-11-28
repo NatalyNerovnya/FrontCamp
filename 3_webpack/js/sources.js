@@ -6,7 +6,7 @@ exports.clickDropdown = clickDropdown;
 exports.getArticles = getArticles;
 require("../css/app.less");
 
-function getArticles(source){
+export function getArticles(source){
  	clearNewsContent();
  	let requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
 

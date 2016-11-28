@@ -28,7 +28,7 @@ module.exports = {
 			drop_console: true,
 			unsafe: true
 		}}),
-		new webpack.DefinePlugin({DEBUG: true})
+		new webpack.DefinePlugin({DEBUG: true, PRODUCTION: false})
 		],
 	devServer: {
 		host: 'localhost',

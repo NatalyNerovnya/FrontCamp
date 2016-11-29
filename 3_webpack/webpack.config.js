@@ -21,13 +21,8 @@ module.exports = {
 	  ]
 	},
 	plugins: [ 
-		new WebpackBrowserPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-		compress: {
-			warnings: false,
-			drop_console: true,
-			unsafe: true
-		}}),
+		new WebpackBrowserPlugin({url: 'http://localhost'}),
+
 		new webpack.DefinePlugin({DEBUG: true, PRODUCTION: false})
 		],
 	devServer: {

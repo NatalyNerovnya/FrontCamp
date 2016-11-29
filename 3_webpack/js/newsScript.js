@@ -42,7 +42,6 @@ export function getArticles(source){
 	 	var elements = document.getElementsByClassName('source-href');
 	 	for (let i = 0; i < elements.length; i++) {
 	 		elements[i].addEventListener('click', () => {
-	 			debugger;
 				getArticles(elements[i].getAttribute('id'));
 	});
 	 }})
@@ -51,9 +50,3 @@ export function getArticles(source){
 
  setSources();
 
-
-// document.getElementsByClassName('source-href').forEach(s => {
-// 	s.addEventListener('click', () => {
-// 		getArticles(s.getAttribute('id'));
-// 	});
-// });

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>News</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript" src="node_modules/whatwg-fetch/fetch.js"></script>
+<script type="text/javascript" src="node_modules/babel-polyfill/dist/polyfill.js"></script>
+	<script type="text/javascript" src="dist/build.js"></script>
+
+</head>
+
+<body>
+<div class="content">
+
+	<div class="logo site">
+		<h1>News</h1>
+		<h5>made with <a href="https://newsapi.org/" target="_blank">newsapi</a></h5>
+	</div>
+
+	<div class="nav">
+		<div class="dropdown">
+		  <button onclick="home.clickDropdown('source-filter');" class="dropbtn">Source filter</button>
+		  <div id="source-filter" class="dropdown-content"></div>
+		</div>
+	</div>
+
+	<div id="news-content">	</div>
+</div>
+
+
+
+</body>
+</html>

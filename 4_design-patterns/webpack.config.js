@@ -1,0 +1,35 @@
+var webpack = require('webpack');
+const WebpackBrowserPlugin = require('webpack-browser-plugin');
+
+module.exports = {
+    entry: "./js/mainImports",
+    output: {
+        path: __dirname + "/dist",
+        filename: "build.js",
+		library: "home"
+    },
+	module: {
+	  loaders: [
+		{
+		  test: /\.js$/,
+		  loader: 'babel',	
+		  },
+		  {
+			  loader: "style-loader!css-loader!less-loader",
+			  test: /\.less$/
+			  }
+	  ]
+	},
+	plugins: [ 
+		new WebpackBrowserPlugin({url: 'http://localhost'}),
+		
+		new webpack.DefinePlugin({DEBUG: true, PRODUCTION: false})
+		],
+	devServer: {
+		host: 'localhost',
+		port: 9081
+	}
+};
+
+
+

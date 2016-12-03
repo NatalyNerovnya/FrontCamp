@@ -1,0 +1,98 @@
+@import "variables";
+
+body{
+	background-color: #f9fdff;
+}
+
+h1{
+	color:@blue-letters-color;
+}
+
+h5{
+	font-size: 25px;
+}
+
+.content{
+	.logo{
+		&.site{
+			background-color: @content-background-color;
+			margin: 20px;
+		}
+	}
+}
+
+.logo{
+	&.site{
+		h1{
+			padding: 5% 5% 0 5%;
+			font-size: 600%;
+		} 
+		h5{
+			padding-left: 60%;
+		}
+	}
+}
+
+
+a{
+	text-decoration: none;
+	color: @blue-letters-color;
+}
+
+a:visited{
+	color: @blue-letters-color;
+}
+.nav{
+	border: solid @blue-letters-color 3px;
+	border-radius: 5%;
+	margin: 20px;
+	background-color: white;
+	float: right;
+}
+
+
+.dropdown-content{
+	display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,1);
+    background-color: white;
+    a {
+	    padding: 12px 16px;
+	    text-decoration: none;
+	    display: block;
+    }
+}
+
+.dropbtn{
+	border: solid @blue-letters-color 3px;
+	border-radius: 5%;
+	background-color: @content-background-color;
+	height: 30px;
+    width: 70%;
+}
+
+.show {display:block;}
+
+@media only screen and (min-width: 300px) and (max-width: 415px) {
+h1{ font-size:300%;}
+.nav{ width: 80%; display: inline; border: none; clear: both;}
+.dropdown { display: inline; margin:5%;}
+.dropbtn{ height: 30px; width: 30%;}
+#news-content{ width: 90%;}
+}
+
+@media only screen and (min-width: 416px) and (max-width: 800px) {
+.nav{ height: 70px; width: 15%;}
+.dropdown { padding: 20% 0 0 10%;}
+} 
+
+@media only screen and (min-width: 801px) and (max-width: 1100px) {
+.nav{ height: 100px; width: 20%; }
+.dropdown { padding: 20% 0 0 10%;}
+}
+
+@media only screen and (min-width: 1101px) and (max-width: 3000px) {
+.nav{ height: 160px; width: 25%;}
+.dropdown { padding: 20% 0 0 10%;}
+}

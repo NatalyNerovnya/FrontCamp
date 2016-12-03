@@ -1,4 +1,3 @@
-
 import {clearNewsContent, hideDropdownList} from './newsContent';
 import {clickDropdown} from './events.js';
 exports.clickDropdown = clickDropdown;

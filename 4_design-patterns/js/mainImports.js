@@ -1,8 +1,9 @@
-import {clearNewsContent, hideDropdownList} from './newsContent';
+import {clearContent, hideDropdownList} from './newsContent';
 import {clickDropdown} from './events.js';
 exports.clickDropdown = clickDropdown;
-exports.clearNewsContent = clearNewsContent;
+exports.clearContent = clearContent;
 exports.hideDropdownList = hideDropdownList;
+
 
 require("../less/app.less");
 

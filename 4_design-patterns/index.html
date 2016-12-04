@@ -13,11 +13,15 @@
 <div class="content">
 
 	<div class="logo site">
-		<h1>News</h1>
+			<h1>News</h1>
 		<h5>made with <a href="https://newsapi.org/" target="_blank">newsapi</a></h5>
 	</div>
 
 	<div class="nav">
+	<div id="lang">
+		<input type="radio" name="lang" value="en" checked>En<br>
+		<input type="radio" name="lang" value="de">De<br>
+	</div>
 		<div class="dropdown">
 		  <button onclick="home.clickDropdown('source-filter');" class="dropbtn">Source filter</button>
 		  <div id="source-filter" class="dropdown-content"></div>

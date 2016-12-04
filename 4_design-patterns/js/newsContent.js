@@ -1,5 +1,5 @@
-export  function clearNewsContent(){
-	let elem = document.getElementById("news-content");
+export  function clearContent(id){
+	let elem = document.getElementById(id);
 	elem.innerHTML = '';
 };
 

@@ -3,8 +3,8 @@ import { dropdown as dropdownTemplate} from '../templates/dropdown';
 import {getArticles} from './getArticles';
 
 export class newsSources{
-   setSources(){
- 	apiWrapper.getData("https://newsapi.org/v1/sources?language=en")
+   setSources(lang){
+ 	apiWrapper.getData(`https://newsapi.org/v1/sources?language=${lang}`)
 	 .then(data => {
 	 	let array = [];
 

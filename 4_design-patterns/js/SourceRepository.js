@@ -4,8 +4,13 @@ import { dropdown as dropdownTemplate} from '../templates/dropdown';
 
 export class SourceRepository{
 
-	getSetOfCategories(lang){
-		apiWrapper.getData(`https://newsapi.org/v1/sources?language=${lang}`)
+	constructor(lang){
+		self = this;
+		self.requestStr = `https://newsapi.org/v1/sources?language=${lang}`;
+	};
+
+	getSetOfCategories(){
+		apiWrapper.getData(requestStr)
 	 	.then(data => {
 	 	let array = [];
 	  	for (let {id} of data.sources) {
@@ -30,11 +35,10 @@ export class SourceRepository{
 		}
 	};
 
-	setSources(lang){
-		getSetOfCategories(lang)
+	setSources(){
+		getSetOfCategories()
 	    .then(arr => setDropdowns(arr);)
 	 	.then(() => addLinksToCategories());
 	 }; 
 
-
-}
+};

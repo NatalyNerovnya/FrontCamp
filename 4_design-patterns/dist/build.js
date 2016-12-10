@@ -106,7 +106,7 @@ var home =
 	exports.clearContent = _newsContent.clearContent;
 	exports.hideDropdownList = _newsContent.hideDropdownList;
 
-	__webpack_require__(15);
+	__webpack_require__(16);
 
 	if (true) {
 		alert("debug mode");
@@ -151,22 +151,27 @@ var home =
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	var clickDropdown = exports.clickDropdown = function clickDropdown(id) {
-			return document.getElementById(id).classList.toggle("show");
+		return document.getElementById(id).classList.toggle("show");
 	};
 
 	window.onload = function () {
-			document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
-					__webpack_require__.e/* nsure */(1, function () {
-							var lang = document.querySelector('input[name="lang"]:checked').value;
-							home.clearContent("source-filter");
-							var src = __webpack_require__(4);
-							var sources = new src.newsSources();
-							sources.setSources(lang);
-					});
+		document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
+			__webpack_require__.e/* nsure */(1, function () {
+				var src = __webpack_require__(4);
+				var app = src.Application.getInstance();
+				debugger;
+
+				var lang = document.querySelector('input[name="lang"]:checked').value;
+				app.setSources(lang);
+				home.clearContent("source-filter");
+				// let src = require("./newsSources.js");
+				// let	sources = new src.newsSources();
+				// sources.setSources(lang);
 			});
+		});
 	};
 
 /***/ },
@@ -179,7 +184,8 @@ var home =
 /* 10 */,
 /* 11 */,
 /* 12 */,
-/* 13 */
+/* 13 */,
+/* 14 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -234,7 +240,7 @@ var home =
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -486,16 +492,16 @@ var home =
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(16);
+	var content = __webpack_require__(17);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(14)(content, {});
+	var update = __webpack_require__(15)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -512,10 +518,10 @@ var home =
 	}
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(13)();
+	exports = module.exports = __webpack_require__(14)();
 	// imports
 
 

@@ -8,8 +8,8 @@ export class Application{
 	 };
 
 
-	setSources(){
-		this.sourceRepository.getSetOfCategories('en');
+	setSources(lang){
+		this.sourceRepository.getSetOfCategories(lang)
 		.then(arr => this.sourceRepository.setDropdowns(arr))
 	 	.then(() => this.addClickEventsToCategories());
 	 }; 

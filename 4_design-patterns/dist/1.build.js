@@ -11,29 +11,94 @@ webpackJsonphome([1],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.newsSources = undefined;
+	exports.Application = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _apiWrapper = __webpack_require__(5);
+	var _SourceRepository = __webpack_require__(5);
 
-	var _dropdown = __webpack_require__(6);
-
-	var _getArticles = __webpack_require__(7);
+	var _ArticlesRepository = __webpack_require__(8);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var newsSources = exports.newsSources = function () {
-		function newsSources() {
-			_classCallCheck(this, newsSources);
+	var Application = exports.Application = function () {
+		function Application() {
+			_classCallCheck(this, Application);
+
+			this.sourceRepository = new _SourceRepository.SourceRepository();
+			this.articlesRepository = new _ArticlesRepository.ArticlesRepository('bbc-news');
 		}
 
-		_createClass(newsSources, [{
+		_createClass(Application, [{
 			key: 'setSources',
 			value: function setSources(lang) {
-				_apiWrapper.apiWrapper.getData('https://newsapi.org/v1/sources?language=' + lang).then(function (data) {
-					var array = [];
+				var _this = this;
 
+				this.sourceRepository.getSetOfCategories(lang).then(function (arr) {
+					return _this.sourceRepository.setDropdowns(arr);
+				}).then(function () {
+					return _this.addClickEventsToCategories();
+				});
+			}
+		}, {
+			key: 'addClickEventsToCategories',
+			value: function addClickEventsToCategories() {
+				var elements = document.getElementsByClassName('source-href');
+
+				var _loop = function _loop(i) {
+					elements[i].addEventListener('click', function () {
+						articlesRepository.getArticles(elements[i].getAttribute('id'));
+					});
+				};
+
+				for (var i = 0; i < elements.length; i++) {
+					_loop(i);
+				}
+			}
+		}], [{
+			key: 'getInstance',
+			value: function getInstance() {
+				if (!Application.instance) {
+					Application.instance = new Application();
+				}
+				return Application.instance;
+			}
+		}]);
+
+		return Application;
+	}();
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.SourceRepository = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _apiWrapper = __webpack_require__(6);
+
+	var _dropdown = __webpack_require__(7);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var SourceRepository = exports.SourceRepository = function () {
+		function SourceRepository() {
+			_classCallCheck(this, SourceRepository);
+
+			this.requestStr = 'https://newsapi.org/v1/sources?language=';
+		}
+
+		_createClass(SourceRepository, [{
+			key: 'getSetOfCategories',
+			value: function getSetOfCategories(lang) {
+				return _apiWrapper.apiWrapper.getData(this.requestStr + lang).then(function (data) {
+					var array = [];
 					var _iteratorNormalCompletion = true;
 					var _didIteratorError = false;
 					var _iteratorError = undefined;
@@ -60,34 +125,26 @@ webpackJsonphome([1],[
 					}
 
 					return new Set(array);
-				}).then(function (arr) {
-					var refArr = '';
-
-					arr.forEach(function (c) {
-						refArr = refArr + ' ' + (0, _dropdown.dropdown)(c);
-					});
-					document.getElementById("source-filter").innerHTML = refArr;
-				}).then(function () {
-					var elements = document.getElementsByClassName('source-href');
-
-					var _loop = function _loop(i) {
-						elements[i].addEventListener('click', function () {
-							(0, _getArticles.getArticles)(elements[i].getAttribute('id'));
-						});
-					};
-
-					for (var i = 0; i < elements.length; i++) {
-						_loop(i);
-					}
 				});
+			}
+		}, {
+			key: 'setDropdowns',
+			value: function setDropdowns(arr) {
+				var refArr = '';
+				arr.forEach(function (c) {
+					refArr = refArr + ' ' + (0, _dropdown.dropdown)(c);
+				});
+				document.getElementById("source-filter").innerHTML = refArr;
 			}
 		}]);
 
-		return newsSources;
+		return SourceRepository;
 	}();
 
+	;
+
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -118,7 +175,7 @@ webpackJsonphome([1],[
 	}();
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -131,7 +188,7 @@ webpackJsonphome([1],[
 	};
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -139,62 +196,87 @@ webpackJsonphome([1],[
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.getArticles = getArticles;
+	exports.ArticlesRepository = undefined;
 
-	var _apiWrapper = __webpack_require__(5);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _variables = __webpack_require__(8);
+	var _apiWrapper = __webpack_require__(6);
 
-	var _paperName = __webpack_require__(9);
+	var _variables = __webpack_require__(9);
 
-	var _newsContainer = __webpack_require__(10);
+	var _paperName = __webpack_require__(10);
 
-	exports.getArticles = getArticles;
+	var _newsContainer = __webpack_require__(11);
 
-	function getArticles(source) {
-		home.clearContent("news-content");
-		var requestArticlstr = 'https://newsapi.org/v1/articles?source=' + source + '&apiKey=' + _variables.API;
-		__webpack_require__(11);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-		_apiWrapper.apiWrapper.getData(requestArticlstr).then(function (data) {
-			var newsContentArr = (0, _paperName.paperName)(data.source);
+	var ArticlesRepository = exports.ArticlesRepository = function () {
+		function ArticlesRepository(source) {
+			_classCallCheck(this, ArticlesRepository);
 
-			var _iteratorNormalCompletion = true;
-			var _didIteratorError = false;
-			var _iteratorError = undefined;
+			self = this;
+			self.requestArticlstr = 'https://newsapi.org/v1/articles?source=' + source + '&apiKey=' + _variables.API;
+		}
 
-			try {
-				for (var _iterator = data.articles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-					var _step$value = _step.value,
-					    description = _step$value.description,
-					    title = _step$value.title,
-					    url = _step$value.url,
-					    urlToImage = _step$value.urlToImage;
+		_createClass(ArticlesRepository, [{
+			key: 'setArticlesContent',
+			value: function setArticlesContent(content) {
+				document.getElementById('news-content').innerHTML = content;
+			}
+		}, {
+			key: 'createDomElements',
+			value: function createDomElements(data) {
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
 
-					newsContentArr = newsContentArr + ' ' + (0, _newsContainer.newsContainer)(urlToImage, url, title, description);
-				}
-			} catch (err) {
-				_didIteratorError = true;
-				_iteratorError = err;
-			} finally {
 				try {
-					if (!_iteratorNormalCompletion && _iterator.return) {
-						_iterator.return();
+					for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var _step$value = _step.value,
+						    description = _step$value.description,
+						    title = _step$value.title,
+						    url = _step$value.url,
+						    urlToImage = _step$value.urlToImage;
+
+						newsContentArr = newsContentArr + ' ' + (0, _newsContainer.newsContainer)(urlToImage, url, title, description);
 					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
 				} finally {
-					if (_didIteratorError) {
-						throw _iteratorError;
+					try {
+						if (!_iteratorNormalCompletion && _iterator.return) {
+							_iterator.return();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
 					}
 				}
 			}
+		}, {
+			key: 'setArticles',
+			value: function setArticles() {
+				setArticlesContent('');
+				__webpack_require__(12);
 
-			document.getElementById("news-content").innerHTML = newsContentArr;
-		});
-		home.hideDropdownList();
-	};
+				_apiWrapper.apiWrapper.getData(self.requestArticlstr).then(function (data) {
+					var newsContentArr = (0, _paperName.paperName)(data.source);
+					createDomElements(data.articles);
+					setArticlesContent(newsContentArr);
+				});
+				home.hideDropdownList();
+			}
+		}]);
+
+		return ArticlesRepository;
+	}();
+
+	;
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -205,7 +287,7 @@ webpackJsonphome([1],[
 	var API = exports.API = "5fb7dea8d7f440b1af9b7cd7cba9640d";
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -218,7 +300,7 @@ webpackJsonphome([1],[
 	};
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -231,16 +313,16 @@ webpackJsonphome([1],[
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(12);
+	var content = __webpack_require__(13);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(14)(content, {});
+	var update = __webpack_require__(15)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -257,10 +339,10 @@ webpackJsonphome([1],[
 	}
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(13)();
+	exports = module.exports = __webpack_require__(14)();
 	// imports
 
 

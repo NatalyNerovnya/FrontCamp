@@ -4,13 +4,13 @@ import { dropdown as dropdownTemplate} from '../templates/dropdown';
 
 export class SourceRepository{
 
-	constructor(lang){
+	constructor(){
 		self = this;
-		self.requestStr = `https://newsapi.org/v1/sources?language=${lang}`;
+		self.requestStr = 'https://newsapi.org/v1/sources?language=';
 	};
 
-	getSetOfCategories(){
-		apiWrapper.getData(requestStr)
+	getSetOfCategories(lang){
+		return apiWrapper.getData(self.requestStr + lang)
 	 	.then(data => {
 	 	let array = [];
 	  	for (let {id} of data.sources) {
@@ -25,20 +25,5 @@ export class SourceRepository{
 	 	})
 	 	document.getElementById("source-filter").innerHTML = refArr;
 	};
-
-	addClickEventsToCategories(){
-		var elements = document.getElementsByClassName('source-href');
-		for(let i = 0; i < elements.length; i++){
-			elements[i].addEventListener('click', () => {
-				getArticles(elements[i].getAttribute('id'))
-			});
-		}
-	};
-
-	setSources(){
-		getSetOfCategories()
-	    .then(arr => setDropdowns(arr);)
-	 	.then(() => addClickEventsToCategories());
-	 }; 
 
 };

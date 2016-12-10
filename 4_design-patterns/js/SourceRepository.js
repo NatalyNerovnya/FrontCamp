@@ -1,6 +1,4 @@
 import { apiWrapper } from './apiWrapper';
-import { dropdown as dropdownTemplate} from '../templates/dropdown';
-
 
 export class SourceRepository{
 
@@ -15,14 +13,6 @@ export class SourceRepository{
 	  	for (let {id} of data.sources) {
 	  		array.push(id);}
 	  	return new Set(array);})
-	};
-
-	setDropdowns(arr){
-		var refArr = '';
-	 	arr.forEach(c => {
-	 		refArr = `${refArr} ${ dropdownTemplate(c)}`;
-	 	})
-	 	document.getElementById("source-filter").innerHTML = refArr;
 	};
 
 };

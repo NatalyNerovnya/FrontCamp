@@ -96,18 +96,16 @@ var home =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	var _newsContent = __webpack_require__(2);
+	var _main = __webpack_require__(2);
 
-	var _events = __webpack_require__(3);
+	__webpack_require__(17);
 
-	__webpack_require__(16);
-
-	exports.clickDropdown = _events.clickDropdown;
-	exports.clearContent = _newsContent.clearContent;
-	exports.hideDropdownList = _newsContent.hideDropdownList;
-	exports.setContent = _newsContent.setContent;
+	exports.clickDropdown = _main.clickDropdown;
+	exports.clearContent = _main.clearContent;
+	exports.hideDropdownList = _main.hideDropdownList;
+	exports.setContent = _main.setContent;
 
 	if (true) {
 		console.log("debug mode");
@@ -119,7 +117,7 @@ var home =
 /***/ },
 /* 1 */,
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -148,44 +146,32 @@ var home =
 	      openDropdown.classList.remove('show');
 	    }
 	  }
-	}
+	};
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
 	var clickDropdown = exports.clickDropdown = function clickDropdown(id) {
-		return document.getElementById(id).classList.toggle("show");
+	  return document.getElementById(id).classList.toggle("show");
 	};
 
 	window.onload = function () {
-		document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
-			__webpack_require__.e/* nsure */(1, function () {
-				var src = __webpack_require__(4);
-				var app = src.Application.getInstance();
-				var lang = document.querySelector('input[name="lang"]:checked').value;
-				app.start(lang);
-			});
-		});
+	  document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
+	    __webpack_require__.e/* nsure */(1, function () {
+	      var src = __webpack_require__(3);
+	      var app = src.Application.getInstance();
+	      var lang = document.querySelector('input[name="lang"]:checked').value;
+	      app.start(lang);
+	    });
+	  });
 	};
 
 /***/ },
+/* 3 */,
 /* 4 */,
 /* 5 */,
 /* 6 */,
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
+/* 10 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -240,7 +226,7 @@ var home =
 	};
 
 /***/ },
-/* 15 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -492,16 +478,21 @@ var home =
 
 
 /***/ },
-/* 16 */
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(17);
+	var content = __webpack_require__(18);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(15)(content, {});
+	var update = __webpack_require__(11)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -518,10 +509,10 @@ var home =
 	}
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(14)();
+	exports = module.exports = __webpack_require__(10)();
 	// imports
 
 

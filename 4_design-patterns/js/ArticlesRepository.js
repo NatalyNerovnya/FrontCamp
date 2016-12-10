@@ -1,7 +1,8 @@
 import { apiWrapper } from './apiWrapper';
 import { API } from './variables';
-import { newsContainer as newsContainerTemplate} from '../templates/newsContainer';
-import { paperName as paperNameTemplate} from '../templates/paperName' ;
+//import { newsContainer as newsContainerTemplate } from '../templates/newsContainer';
+import { paperName as paperNameTemplate } from '../templates/paperName' ;
+import { ArticleDecorator } from './ArticleDecorator' ;
 
 export class ArticlesRepository{
 
@@ -13,7 +14,8 @@ export class ArticlesRepository{
 	createDomElements(data){
 		var newsContentArr = paperNameTemplate(data.source);
 		for (let {description, title, url, urlToImage} of data.articles) {
-	  	newsContentArr = `${newsContentArr} ${newsContainerTemplate(urlToImage, url, title, description)}`;
+			let decorator = new ArticleDecorator(urlToImage, url, title, description);
+	  		newsContentArr = `${newsContentArr} ${decorator.render()}`;
 	    }
 	    return newsContentArr;
 	};

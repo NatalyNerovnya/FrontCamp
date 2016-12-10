@@ -213,14 +213,16 @@ webpackJsonphome([1],[
 	exports.ArticlesRepository = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	//import { newsContainer as newsContainerTemplate } from '../templates/newsContainer';
+
 
 	var _apiWrapper = __webpack_require__(6);
 
 	var _variables = __webpack_require__(9);
 
-	var _newsContainer = __webpack_require__(10);
+	var _paperName = __webpack_require__(10);
 
-	var _paperName = __webpack_require__(11);
+	var _ArticleDecorator = __webpack_require__(11);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -248,7 +250,8 @@ webpackJsonphome([1],[
 						    url = _step$value.url,
 						    urlToImage = _step$value.urlToImage;
 
-						newsContentArr = newsContentArr + ' ' + (0, _newsContainer.newsContainer)(urlToImage, url, title, description);
+						var decorator = new _ArticleDecorator.ArticleDecorator(urlToImage, url, title, description);
+						newsContentArr = newsContentArr + ' ' + decorator.render();
 					}
 				} catch (err) {
 					_didIteratorError = true;
@@ -298,10 +301,10 @@ webpackJsonphome([1],[
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
-	var newsContainer = exports.newsContainer = function newsContainer(urlToImage, url, title, description) {
-		return "<div class=\"news\"> \n \t<img class=\"news-img\"src=\"" + urlToImage + "\"/>\n\t<div class=\"logo news-content\">\n\t\t<a href=\"" + url + "\" target=\"_blank\">" + title + "</a>\n\t</div>\n\t<p class=\"news-text\">" + description + "</p> \n\t</div>\n\t<div class=\"clear\">\n </div>";
+	var paperName = exports.paperName = function paperName(name) {
+	  return "<h3 id=\"paperName\">" + name.toUpperCase() + "</h3>";
 	};
 
 /***/ },
@@ -311,11 +314,32 @@ webpackJsonphome([1],[
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	var paperName = exports.paperName = function paperName(name) {
-	  return "<h3 id=\"paperName\">" + name.toUpperCase() + "</h3>";
-	};
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ArticleDecorator = exports.ArticleDecorator = function () {
+		function ArticleDecorator(urlToImage, url, title, description) {
+			_classCallCheck(this, ArticleDecorator);
+
+			this.image = urlToImage;
+			this.url = url;
+			this.title = title;
+			this.description = description;
+		}
+
+		_createClass(ArticleDecorator, [{
+			key: "render",
+			value: function render() {
+				return "<div class=\"news\"> \n\t \t<img class=\"news-img\"src=\"" + this.image + "\"/>\n\t\t<div class=\"logo news-content\">\n\t\t\t<a href=\"" + this.url + "\" target=\"_blank\">" + this.title + "</a>\n\t\t</div>\n\t\t<p class=\"news-text\">" + this.description + "</p> \n\t\t</div>\n\t\t<div class=\"clear\">\n\t   </div>";
+			}
+		}]);
+
+		return ArticleDecorator;
+	}();
 
 /***/ },
 /* 12 */

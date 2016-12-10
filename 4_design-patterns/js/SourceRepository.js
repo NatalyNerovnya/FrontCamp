@@ -26,7 +26,7 @@ export class SourceRepository{
 	 	document.getElementById("source-filter").innerHTML = refArr;
 	};
 
-	addClickEventsToCategories(){
+	addLinksToCategories(){
 		var elements = document.getElementsByClassName('source-href');
 		for(let i = 0; i < elements.length; i++){
 			elements[i].addEventListener('click', () => {
@@ -38,7 +38,7 @@ export class SourceRepository{
 	setSources(){
 		getSetOfCategories()
 	    .then(arr => setDropdowns(arr);)
-	 	.then(() => addClickEventsToCategories());
+	 	.then(() => addLinksToCategories());
 	 }; 
 
 };

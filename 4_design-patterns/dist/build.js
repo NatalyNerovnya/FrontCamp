@@ -92,15 +92,16 @@ var home =
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	var _main = __webpack_require__(2);
 
-	__webpack_require__(17);
+	__webpack_require__(20);
 
 	exports.clickDropdown = _main.clickDropdown;
 	exports.clearContent = _main.clearContent;
@@ -115,8 +116,8 @@ var home =
 	}
 
 /***/ },
-/* 1 */,
-/* 2 */
+
+/***/ 2:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -156,7 +157,9 @@ var home =
 	  document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
 	    __webpack_require__.e/* nsure */(1, function () {
 	      var src = __webpack_require__(3);
+	      var logger = __webpack_require__(18);
 	      var app = src.Application.getInstance();
+	      var observerToConsole = new logger.LogToConsoleObserver(app);
 	      var lang = document.querySelector('input[name="lang"]:checked').value;
 	      app.start(lang);
 	    });
@@ -164,14 +167,8 @@ var home =
 	};
 
 /***/ },
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+
+/***/ 10:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -226,7 +223,8 @@ var home =
 	};
 
 /***/ },
-/* 11 */
+
+/***/ 11:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -478,18 +476,14 @@ var home =
 
 
 /***/ },
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */
+
+/***/ 20:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(18);
+	var content = __webpack_require__(21);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(11)(content, {});
@@ -509,7 +503,8 @@ var home =
 	}
 
 /***/ },
-/* 18 */
+
+/***/ 21:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(10)();
@@ -523,4 +518,5 @@ var home =
 
 
 /***/ }
-/******/ ]);
+
+/******/ });

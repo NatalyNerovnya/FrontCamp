@@ -22,39 +22,54 @@ webpackJsonphome([1],[
 
 	var _SourceRender = __webpack_require__(15);
 
+	var _Observable2 = __webpack_require__(17);
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Application = exports.Application = function () {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Application = exports.Application = function (_Observable) {
+		_inherits(Application, _Observable);
+
 		function Application() {
 			_classCallCheck(this, Application);
 
-			this.sourceRepository = new _SourceRepository.SourceRepository();
-			this.sourceRender = new _SourceRender.SourceRender();
-			this.articlesRepository = new _ArticlesRepository.ArticlesRepository();
-			this.articlesRender = new _ArticlesRender.ArticlesRender();
+			var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this));
+
+			_this.sourceRepository = new _SourceRepository.SourceRepository();
+			_this.sourceRender = new _SourceRender.SourceRender();
+			_this.articlesRepository = new _ArticlesRepository.ArticlesRepository();
+			_this.articlesRender = new _ArticlesRender.ArticlesRender();
+			_this.stateForLogging = 'create instance';
+			return _this;
 		}
 
 		_createClass(Application, [{
 			key: 'start',
 			value: function start(lang) {
-				var _this = this;
+				var _this2 = this;
 
-				debugger;
+				this.stateForLogging = 'start application';
+				this.notify();
 				this.sourceRepository.getSetOfCategories(lang).then(function (arr) {
-					return _this.sourceRender.setDropdowns(arr);
+					return _this2.sourceRender.setDropdowns(arr);
 				}).then(function () {
-					return _this.addClickEventsToCategories();
+					return _this2.addClickEventsToCategories();
 				});
 			}
 		}, {
 			key: 'getArticles',
 			value: function getArticles(source) {
-				var _this2 = this;
+				var _this3 = this;
 
+				this.stateForLogging = 'show news';
+				this.notify();
 				home.clearContent("source-filter");
 				home.clearContent("news-content");
 				this.articlesRepository.setArticles(source).then(function (data) {
-					return _this2.articlesRender.createDomElements(data);
+					return _this3.articlesRender.createDomElements(data);
 				}).then(function (content) {
 					return home.setContent('news-content', content);
 				});
@@ -85,7 +100,7 @@ webpackJsonphome([1],[
 		}]);
 
 		return Application;
-	}();
+	}(_Observable2.Observable);
 
 /***/ },
 /* 4 */
@@ -435,6 +450,116 @@ webpackJsonphome([1],[
 	var dropdown = exports.dropdown = function dropdown(sourceId) {
 	  return "<a href=\"#\" id=" + sourceId + " class=\"source-href\">" + sourceId + "</a>";
 	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Observable = exports.Observable = function () {
+		function Observable() {
+			_classCallCheck(this, Observable);
+
+			this.observers = [];
+		}
+
+		_createClass(Observable, [{
+			key: "attach",
+			value: function attach(observer) {
+				this.observers.push(observer);
+			}
+		}, {
+			key: "detach",
+			value: function detach(observer) {
+				var indexOfElement = this.observers.indexOf(observer);
+				if (indexOfElement != -1) {
+					this.observers.splice(indexOfElement, 1);
+				}
+			}
+		}, {
+			key: "notify",
+			value: function notify() {
+				this.observers.forEach(function (o) {
+					return o.update();
+				});
+			}
+		}]);
+
+		return Observable;
+	}();
+
+	;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.LogToConsoleObserver = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _Observer = __webpack_require__(19);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var LogToConsoleObserver /*extends Observer*/ = exports.LogToConsoleObserver = function () {
+		function LogToConsoleObserver(subject) {
+			_classCallCheck(this, LogToConsoleObserver);
+
+			this.subject = subject;
+			this.subject.attach(this);
+		}
+
+		_createClass(LogToConsoleObserver, [{
+			key: 'update',
+			value: function update() {
+				console.log('Console log: ' + this.subject.stateForLogging + ';');
+			}
+		}]);
+
+		return LogToConsoleObserver;
+	}();
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Observer = exports.Observer = function () {
+		function Observer() {
+			_classCallCheck(this, Observer);
+		}
+
+		_createClass(Observer, [{
+			key: "update",
+			value: function update() {}
+		}]);
+
+		return Observer;
+	}();
 
 /***/ }
 ]);

@@ -22,9 +22,11 @@ export function hideDropdownList(){
  export let clickDropdown = id => document.getElementById(id).classList.toggle("show");
 
 window.onload = function(){document.getElementsByClassName('dropbtn')[0].addEventListener('click',() => {
-	require.ensure(['./Application.js'],() => {	
+	require.ensure(['./Application.js', './LogToConsoleObserver.js'],() => {	
 		let src = require('./Application.js');
-		let app = src.Application.getInstance();		
+    let logger = require('./LogToConsoleObserver.js');
+    let app = src.Application.getInstance();  
+    let observerToConsole = new logger.LogToConsoleObserver(app)
 		var lang = document.querySelector('input[name="lang"]:checked').value;	
 		app.start(lang);			
 	});

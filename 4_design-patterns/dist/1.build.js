@@ -30,8 +30,8 @@ webpackJsonphome([1],[
 
 		_createClass(newsSources, [{
 			key: 'setSources',
-			value: function setSources(lang) {
-				_apiWrapper.apiWrapper.getData('https://newsapi.org/v1/sources?language=' + lang).then(function (data) {
+			value: function setSources() {
+				_apiWrapper.apiWrapper.getData("https://newsapi.org/v1/sources?language=en").then(function (data) {
 					var array = [];
 
 					var _iteratorNormalCompletion = true;
@@ -269,6 +269,104 @@ webpackJsonphome([1],[
 
 	// exports
 
+
+/***/ },
+/* 13 */,
+/* 14 */,
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.newSourcesDe = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _apiWrapper = __webpack_require__(5);
+
+	var _dropdown = __webpack_require__(6);
+
+	var _getArticles = __webpack_require__(7);
+
+	var _newsSources2 = __webpack_require__(4);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	exports.getArticles = _getArticles.getArticles;
+
+	var newSourcesDe = exports.newSourcesDe = function (_newsSources) {
+		_inherits(newSourcesDe, _newsSources);
+
+		function newSourcesDe() {
+			_classCallCheck(this, newSourcesDe);
+
+			return _possibleConstructorReturn(this, (newSourcesDe.__proto__ || Object.getPrototypeOf(newSourcesDe)).apply(this, arguments));
+		}
+
+		_createClass(newSourcesDe, [{
+			key: 'setSources',
+			value: function setSources() {
+				_apiWrapper.apiWrapper.getData("https://newsapi.org/v1/sources?language=de").then(function (data) {
+					var array = [];
+
+					var _iteratorNormalCompletion = true;
+					var _didIteratorError = false;
+					var _iteratorError = undefined;
+
+					try {
+						for (var _iterator = data.sources[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+							var id = _step.value.id;
+
+							array.push(id);
+						}
+					} catch (err) {
+						_didIteratorError = true;
+						_iteratorError = err;
+					} finally {
+						try {
+							if (!_iteratorNormalCompletion && _iterator.return) {
+								_iterator.return();
+							}
+						} finally {
+							if (_didIteratorError) {
+								throw _iteratorError;
+							}
+						}
+					}
+
+					return new Set(array);
+				}).then(function (arr) {
+					var refArr = '';
+
+					arr.forEach(function (c) {
+						refArr = refArr + ' ' + (0, _dropdown.dropdown)(c);
+					});
+					document.getElementById("source-filter").innerHTML = refArr;
+				}).then(function () {
+					var elements = document.getElementsByClassName('source-href');
+
+					var _loop = function _loop(i) {
+						elements[i].addEventListener('click', function () {
+							(0, _getArticles.getArticles)(elements[i].getAttribute('id'));
+						});
+					};
+
+					for (var i = 0; i < elements.length; i++) {
+						_loop(i);
+					}
+				});
+			}
+		}]);
+
+		return newSourcesDe;
+	}(_newsSources2.newsSources);
 
 /***/ }
 ]);

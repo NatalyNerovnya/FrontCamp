@@ -1,10 +1,12 @@
 import { apiWrapper } from './apiWrapper';
 import { dropdown as dropdownTemplate} from '../templates/dropdown';
-import {getArticles} from './getArticles';
+import { getArticles } from './getArticles';
+import { newsSources } from './newsSources';
+exports.getArticles = getArticles;
 
-export class newsSources{
-   setSources(){
- 	apiWrapper.getData("https://newsapi.org/v1/sources?language=en")
+export class newSourcesDe extends newsSources{
+	setSources(){
+ 	apiWrapper.getData("https://newsapi.org/v1/sources?language=de")
 	 .then(data => {
 	 	let array = [];
 

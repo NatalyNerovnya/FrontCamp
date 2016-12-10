@@ -106,7 +106,7 @@ var home =
 	exports.clearContent = _newsContent.clearContent;
 	exports.hideDropdownList = _newsContent.hideDropdownList;
 
-	__webpack_require__(15);
+	__webpack_require__(16);
 
 	if (true) {
 		alert("debug mode");
@@ -151,22 +151,30 @@ var home =
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	var clickDropdown = exports.clickDropdown = function clickDropdown(id) {
-			return document.getElementById(id).classList.toggle("show");
+		return document.getElementById(id).classList.toggle("show");
 	};
 
 	window.onload = function () {
-			document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
-					__webpack_require__.e/* nsure */(1, function () {
-							var lang = document.querySelector('input[name="lang"]:checked').value;
-							home.clearContent("source-filter");
-							var src = __webpack_require__(4);
-							var sources = new src.newsSources();
-							sources.setSources(lang);
-					});
+		document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
+			__webpack_require__.e/* nsure */(1, function () {
+				var lang = document.querySelector('input[name="lang"]:checked').value;
+				var sources;
+				debugger;
+				home.clearContent("source-filter");
+				if (lang === "en") {
+					var src = __webpack_require__(4);
+					sources = new src.newsSources();
+				} else if (lang === "de") {
+					var _src = __webpack_require__(15);
+					sources = new _src.newSourcesDe();
+				}
+
+				sources.setSources();
 			});
+		});
 	};
 
 /***/ },
@@ -486,13 +494,14 @@ var home =
 
 
 /***/ },
-/* 15 */
+/* 15 */,
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(16);
+	var content = __webpack_require__(17);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(14)(content, {});
@@ -512,7 +521,7 @@ var home =
 	}
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(13)();

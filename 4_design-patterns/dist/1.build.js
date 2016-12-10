@@ -26,18 +26,32 @@ webpackJsonphome([1],[
 			_classCallCheck(this, Application);
 
 			this.sourceRepository = new _SourceRepository.SourceRepository();
-			this.articlesRepository = new _ArticlesRepository.ArticlesRepository('bbc-news');
+			this.articlesRepository = new _ArticlesRepository.ArticlesRepository();
 		}
 
 		_createClass(Application, [{
-			key: 'setSources',
-			value: function setSources(lang) {
+			key: 'start',
+			value: function start(lang) {
 				var _this = this;
 
+				debugger;
 				this.sourceRepository.getSetOfCategories(lang).then(function (arr) {
 					return _this.sourceRepository.setDropdowns(arr);
 				}).then(function () {
 					return _this.addClickEventsToCategories();
+				});
+			}
+		}, {
+			key: 'getArticles',
+			value: function getArticles(source) {
+				var _this2 = this;
+
+				home.clearContent("source-filter");
+				home.clearContent("news-content");
+				this.articlesRepository.setArticles(source).then(function (data) {
+					return _this2.articlesRepository.createDomElements(data);
+				}).then(function (content) {
+					return home.setContent('news-content', content);
 				});
 			}
 		}, {
@@ -47,7 +61,7 @@ webpackJsonphome([1],[
 
 				var _loop = function _loop(i) {
 					elements[i].addEventListener('click', function () {
-						articlesRepository.getArticles(elements[i].getAttribute('id'));
+						Application.instance.getArticles(elements[i].getAttribute('id'));
 					});
 				};
 
@@ -204,34 +218,30 @@ webpackJsonphome([1],[
 
 	var _variables = __webpack_require__(9);
 
-	var _paperName = __webpack_require__(10);
+	var _newsContainer = __webpack_require__(10);
 
-	var _newsContainer = __webpack_require__(11);
+	var _paperName = __webpack_require__(11);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var ArticlesRepository = exports.ArticlesRepository = function () {
-		function ArticlesRepository(source) {
+		function ArticlesRepository() {
 			_classCallCheck(this, ArticlesRepository);
 
 			self = this;
-			self.requestArticlstr = 'https://newsapi.org/v1/articles?source=' + source + '&apiKey=' + _variables.API;
+			self.requestArticlstr = 'https://newsapi.org/v1/articles?apiKey=' + _variables.API + '&source=';
 		}
 
 		_createClass(ArticlesRepository, [{
-			key: 'setArticlesContent',
-			value: function setArticlesContent(content) {
-				document.getElementById('news-content').innerHTML = content;
-			}
-		}, {
 			key: 'createDomElements',
 			value: function createDomElements(data) {
+				var newsContentArr = (0, _paperName.paperName)(data.source);
 				var _iteratorNormalCompletion = true;
 				var _didIteratorError = false;
 				var _iteratorError = undefined;
 
 				try {
-					for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+					for (var _iterator = data.articles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 						var _step$value = _step.value,
 						    description = _step$value.description,
 						    title = _step$value.title,
@@ -254,19 +264,14 @@ webpackJsonphome([1],[
 						}
 					}
 				}
+
+				return newsContentArr;
 			}
 		}, {
 			key: 'setArticles',
-			value: function setArticles() {
-				setArticlesContent('');
+			value: function setArticles(source) {
 				__webpack_require__(12);
-
-				_apiWrapper.apiWrapper.getData(self.requestArticlstr).then(function (data) {
-					var newsContentArr = (0, _paperName.paperName)(data.source);
-					createDomElements(data.articles);
-					setArticlesContent(newsContentArr);
-				});
-				home.hideDropdownList();
+				return _apiWrapper.apiWrapper.getData(self.requestArticlstr + source);
 			}
 		}]);
 
@@ -293,10 +298,10 @@ webpackJsonphome([1],[
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
-	var paperName = exports.paperName = function paperName(name) {
-	  return "<h3 id=\"paperName\">" + name.toUpperCase() + "</h3>";
+	var newsContainer = exports.newsContainer = function newsContainer(urlToImage, url, title, description) {
+		return "<div class=\"news\"> \n \t<img class=\"news-img\"src=\"" + urlToImage + "\"/>\n\t<div class=\"logo news-content\">\n\t\t<a href=\"" + url + "\" target=\"_blank\">" + title + "</a>\n\t</div>\n\t<p class=\"news-text\">" + description + "</p> \n\t</div>\n\t<div class=\"clear\">\n </div>";
 	};
 
 /***/ },
@@ -306,10 +311,10 @@ webpackJsonphome([1],[
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
-	var newsContainer = exports.newsContainer = function newsContainer(urlToImage, url, title, description) {
-		return "<div class=\"news\"> \n \t<img class=\"news-img\"src=\"" + urlToImage + "\"/>\n\t<div class=\"logo news-content\">\n\t\t<a href=\"" + url + "\" target=\"_blank\">" + title + "</a>\n\t</div>\n\t<p class=\"news-text\">" + description + "</p> \n\t</div>\n\t<div class=\"clear\">\n </div>";
+	var paperName = exports.paperName = function paperName(name) {
+	  return "<h3 id=\"paperName\">" + name.toUpperCase() + "</h3>";
 	};
 
 /***/ },

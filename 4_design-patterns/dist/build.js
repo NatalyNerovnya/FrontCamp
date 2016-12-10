@@ -102,14 +102,15 @@ var home =
 
 	var _events = __webpack_require__(3);
 
+	__webpack_require__(16);
+
 	exports.clickDropdown = _events.clickDropdown;
 	exports.clearContent = _newsContent.clearContent;
 	exports.hideDropdownList = _newsContent.hideDropdownList;
-
-	__webpack_require__(16);
+	exports.setContent = _newsContent.setContent;
 
 	if (true) {
-		alert("debug mode");
+		console.log("debug mode");
 	}
 	if (false) {
 		console.log("Production");
@@ -126,10 +127,15 @@ var home =
 	  value: true
 	});
 	exports.clearContent = clearContent;
+	exports.setContent = setContent;
 	exports.hideDropdownList = hideDropdownList;
 	function clearContent(id) {
+	  home.setContent(id, '');
+	};
+
+	function setContent(id, content) {
 	  var elem = document.getElementById(id);
-	  elem.innerHTML = '';
+	  elem.innerHTML = content;
 	};
 
 	function hideDropdownList() {
@@ -162,14 +168,8 @@ var home =
 			__webpack_require__.e/* nsure */(1, function () {
 				var src = __webpack_require__(4);
 				var app = src.Application.getInstance();
-				debugger;
-
 				var lang = document.querySelector('input[name="lang"]:checked').value;
-				app.setSources(lang);
-				home.clearContent("source-filter");
-				// let src = require("./newsSources.js");
-				// let	sources = new src.newsSources();
-				// sources.setSources(lang);
+				app.start(lang);
 			});
 		});
 	};

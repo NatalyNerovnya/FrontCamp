@@ -1,14 +1,14 @@
-import {clearContent, hideDropdownList} from './newsContent';
-import {clickDropdown} from './events.js';
+import { clearContent, setContent, hideDropdownList} from './newsContent';
+import { clickDropdown } from './events.js';
+require("../less/app.less");
+
 exports.clickDropdown = clickDropdown;
 exports.clearContent = clearContent;
 exports.hideDropdownList = hideDropdownList;
-
-
-require("../less/app.less");
+exports.setContent = setContent;
 
  if(DEBUG){
-	alert("debug mode");
+	console.log("debug mode");
 }
 if(PRODUCTION){
 	console.log("Production");

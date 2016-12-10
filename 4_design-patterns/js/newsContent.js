@@ -1,6 +1,10 @@
 export  function clearContent(id){
-	let elem = document.getElementById(id);
-	elem.innerHTML = '';
+	home.setContent(id,'');
+};
+
+export  function setContent(id, content){
+  let elem = document.getElementById(id);
+  elem.innerHTML = content;
 };
 
 export function hideDropdownList(){

@@ -1,36 +1,26 @@
 import { apiWrapper } from './apiWrapper';
 import { API } from './variables';
-import { paperName as paperNameTemplate} from '../templates/paperName' ;
 import { newsContainer as newsContainerTemplate} from '../templates/newsContainer';
+import { paperName as paperNameTemplate} from '../templates/paperName' ;
 
 export class ArticlesRepository{
 
-	constructor(source){
+	constructor(){
 		self = this;
-		self.requestArticlstr = `https://newsapi.org/v1/articles?source=${source}&apiKey=${API}`;
-	};
-
-	setArticlesContent(content){
-		document.getElementById('news-content').innerHTML = content;
+		self.requestArticlstr = `https://newsapi.org/v1/articles?apiKey=${API}&source=`;
 	};
 
 	createDomElements(data){
-		for (let {description, title, url, urlToImage} of data) {
+		var newsContentArr = paperNameTemplate(data.source);
+		for (let {description, title, url, urlToImage} of data.articles) {
 	  	newsContentArr = `${newsContentArr} ${newsContainerTemplate(urlToImage, url, title, description)}`;
 	    }
+	    return newsContentArr;
 	};
 
-	setArticles(){
- 	setArticlesContent(''); 	
+	setArticles(source){	
  	require("../less/news.less");
-
- 	apiWrapper.getData(self.requestArticlstr)
-	 .then(data => {
-	 	let newsContentArr = paperNameTemplate(data.source);
-	 	createDomElements(data.articles);
-	    setArticlesContent(newsContentArr);
-	 });
- 	home.hideDropdownList();
+ 	return apiWrapper.getData(self.requestArticlstr + source)
  };
 
 };

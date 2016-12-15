@@ -101,7 +101,7 @@ var home =
 
 	var _main = __webpack_require__(2);
 
-	__webpack_require__(20);
+	__webpack_require__(21);
 
 	exports.clickDropdown = _main.clickDropdown;
 	exports.clearContent = _main.clearContent;
@@ -157,7 +157,7 @@ var home =
 	  document.getElementsByClassName('dropbtn')[0].addEventListener('click', function () {
 	    __webpack_require__.e/* nsure */(1, function () {
 	      var src = __webpack_require__(3);
-	      var logger = __webpack_require__(18);
+	      var logger = __webpack_require__(19);
 	      var app = src.Application.getInstance();
 	      var observerToConsole = new logger.LogToConsoleObserver(app);
 	      var lang = document.querySelector('input[name="lang"]:checked').value;
@@ -477,13 +477,13 @@ var home =
 
 /***/ },
 
-/***/ 20:
+/***/ 21:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(21);
+	var content = __webpack_require__(22);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(11)(content, {});
@@ -504,7 +504,7 @@ var home =
 
 /***/ },
 
-/***/ 21:
+/***/ 22:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(10)();

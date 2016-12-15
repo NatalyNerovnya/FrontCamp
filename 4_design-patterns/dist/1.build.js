@@ -20,9 +20,9 @@ webpackJsonphome([1],[
 
 	var _ArticlesRender = __webpack_require__(12);
 
-	var _SourceRender = __webpack_require__(15);
+	var _SourceRender = __webpack_require__(16);
 
-	var _Observable2 = __webpack_require__(17);
+	var _Observable2 = __webpack_require__(18);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -305,7 +305,9 @@ webpackJsonphome([1],[
 
 	var _paperName = __webpack_require__(13);
 
-	var _ArticleDecorator = __webpack_require__(14);
+	var _ArticleTemplateRender = __webpack_require__(14);
+
+	var _ArticleDecorator = __webpack_require__(15);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -317,6 +319,7 @@ webpackJsonphome([1],[
 		_createClass(ArticlesRender, [{
 			key: 'createDomElements',
 			value: function createDomElements(data) {
+
 				var newsContentArr = (0, _paperName.paperName)(data.source);
 				var _iteratorNormalCompletion = true;
 				var _didIteratorError = false;
@@ -330,7 +333,8 @@ webpackJsonphome([1],[
 						    url = _step$value.url,
 						    urlToImage = _step$value.urlToImage;
 
-						var decorator = new _ArticleDecorator.ArticleDecorator(urlToImage, url, title, description);
+						var article = new _ArticleTemplateRender.ArticleTemplateRender(urlToImage, url, title, description);
+						var decorator = new _ArticleDecorator.ArticleDecorator(article);
 						newsContentArr = newsContentArr + ' ' + decorator.render();
 					}
 				} catch (err) {
@@ -382,9 +386,9 @@ webpackJsonphome([1],[
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var ArticleDecorator = exports.ArticleDecorator = function () {
-		function ArticleDecorator(urlToImage, url, title, description) {
-			_classCallCheck(this, ArticleDecorator);
+	var ArticleTemplateRender = exports.ArticleTemplateRender = function () {
+		function ArticleTemplateRender(urlToImage, url, title, description) {
+			_classCallCheck(this, ArticleTemplateRender);
 
 			this.image = urlToImage;
 			this.url = url;
@@ -392,10 +396,41 @@ webpackJsonphome([1],[
 			this.description = description;
 		}
 
+		_createClass(ArticleTemplateRender, [{
+			key: "render",
+			value: function render() {
+				return "\n\t \t<img class=\"news-img\"src=\"" + this.image + "\"/>\n\t\t<div class=\"logo news-content\">\n\t\t\t<a href=\"" + this.url + "\" target=\"_blank\">" + this.title + "</a>\n\t\t</div>\n\t\t<p class=\"news-text\">" + this.description + "</p> \n\t\t</div>";
+			}
+		}]);
+
+		return ArticleTemplateRender;
+	}();
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var ArticleDecorator = exports.ArticleDecorator = function () {
+		function ArticleDecorator(articleTemplate) {
+			_classCallCheck(this, ArticleDecorator);
+
+			this.articleTemplate = articleTemplate;
+		}
+
 		_createClass(ArticleDecorator, [{
 			key: "render",
 			value: function render() {
-				return "<div class=\"news\"> \n\t \t<img class=\"news-img\"src=\"" + this.image + "\"/>\n\t\t<div class=\"logo news-content\">\n\t\t\t<a href=\"" + this.url + "\" target=\"_blank\">" + this.title + "</a>\n\t\t</div>\n\t\t<p class=\"news-text\">" + this.description + "</p> \n\t\t</div>\n\t\t<div class=\"clear\">\n\t   </div>";
+				return "<div class=\"news\"> \n\t \t" + this.articleTemplate.render() + "\n\t\t<div class=\"clear\">\n\t   </div>";
 			}
 		}]);
 
@@ -403,7 +438,7 @@ webpackJsonphome([1],[
 	}();
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -415,7 +450,7 @@ webpackJsonphome([1],[
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _dropdown = __webpack_require__(16);
+	var _dropdown = __webpack_require__(17);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -439,7 +474,7 @@ webpackJsonphome([1],[
 	}();
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -452,7 +487,7 @@ webpackJsonphome([1],[
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -500,7 +535,7 @@ webpackJsonphome([1],[
 	;
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -512,7 +547,7 @@ webpackJsonphome([1],[
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _Observer = __webpack_require__(19);
+	var _Observer = __webpack_require__(20);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -535,7 +570,7 @@ webpackJsonphome([1],[
 	}();
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	"use strict";

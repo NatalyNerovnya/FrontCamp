@@ -1,0 +1,1 @@
+db.authors.remove({"second-name" : {$eq: "Nerovnya"}})

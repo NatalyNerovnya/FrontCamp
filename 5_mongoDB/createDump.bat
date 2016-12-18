@@ -1,0 +1,1 @@
+mongodump -h ds141937.mlab.com:41937 -d posts -u %1 -p %2 --gzip --archive=%3.gz 

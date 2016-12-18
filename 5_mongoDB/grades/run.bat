@@ -1,0 +1,1 @@
+mongo ds037824.mlab.com:37824/grades -u NatalyNerovnya -p qwerty123 < ./script.js

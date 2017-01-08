@@ -26,7 +26,6 @@ router.post('/add',upload.single('picture'), function(req, res, next) {
 router.get('/getAll', function(req, res, next) {
   articleCtrl.getAll()
   .then((articles) => {
-    console.log(articles);
     res.render('article/showAll', {articles});
   });
 });
@@ -56,8 +55,18 @@ router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
 
   articleCtrl.getById(req.body.id)
     .then((article) => {
-      res.render('article/showAll', {article});
+      res.render('article/showArticle', {article});
     });  
+  
+});
+
+router.get('/delete/:articleId',upload.single('picture'), function(req, res, next) {
+  articleCtrl.remove(req.params['articleId']);
+
+  articleCtrl.getAll()
+    .then((articles) => {
+      res.render('article/showAll', {articles});
+    }); 
   
 });
 

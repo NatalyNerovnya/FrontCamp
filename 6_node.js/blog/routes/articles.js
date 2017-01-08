@@ -60,7 +60,7 @@ router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
   
 });
 
-router.get('/delete/:articleId',upload.single('picture'), function(req, res, next) {
+router.get('/delete/:articleId', function(req, res, next) {
   articleCtrl.remove(req.params['articleId']);
 
   articleCtrl.getAll()

@@ -50,6 +50,7 @@ module.exports = {
     edit: function(articleModel, id) {
 
         var article = {
+                    title: articleModel.title,
                     text: articleModel.text
                 }; 
 

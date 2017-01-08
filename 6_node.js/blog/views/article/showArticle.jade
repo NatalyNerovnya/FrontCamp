@@ -2,5 +2,6 @@ extends ../layout
 
 block content    
     div(class='articleBox')
+      span(class='articleDate') #{article.publishDate}
       h2(class='articleTitle') #{article.title} 
       p #{article.text}

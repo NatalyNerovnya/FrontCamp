@@ -2,12 +2,12 @@ var mongoose = require('mongoose');
 
 var articleSchema = new mongoose.Schema({
     title: {
-        type: String//,
-        //required: true
+        type: String,
+        required: true
     },
     text: {
-        type: String//,
-       // required: true
+        type: String,
+        required: true
     },
     publishDate: {
         type: Date,

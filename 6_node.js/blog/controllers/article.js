@@ -2,7 +2,6 @@ var Article = require('../models/Article');
 
 module.exports = {
     add: function(articleModel) {
-        debugger;
         return new Promise(function (resolve, reject) {
 
             var article = new Article
@@ -24,8 +23,9 @@ module.exports = {
             });            
     },
 
-    getTopTen: function() {
-        
+    getAll: function() {
+        console.log("getall in controller");
+        return Article.find();
     },
 
     getById: function(articleId) {

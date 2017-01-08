@@ -1,0 +1,4 @@
+to create new blog : http://localhost:4000/articles/add
+to show all blogs: http://localhost:4000/articles/getAll
+to delete blog(should enter blog id which store in mlab db https://mlab.com/databases/blog/collections/articles?q=&f=&s=&pageNum=0&pageSize=10) : e.g. http://localhost:4000/articles/delete/58721313bf65582c74138ebe
+to update blog (should enter blog id which store in mlab db https://mlab.com/databases/blog/collections/articles?q=&f=&s=&pageNum=0&pageSize=10) : e.g. http://localhost:4000/articles/edit/5871fa8334af653984a50a1a

@@ -52,8 +52,6 @@ module.exports = {
         var article = {
                     text: articleModel.text
                 }; 
-        
-        console.log(id);
 
         Article.update({"_id" : id},{ $set: article}, function (err, savedArticle) {
             if (err) {

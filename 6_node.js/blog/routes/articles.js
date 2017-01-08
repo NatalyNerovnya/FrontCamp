@@ -56,7 +56,7 @@ router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
 
   articleCtrl.getById(req.body.id)
     .then((article) => {
-      res.render('article/showArticle', {article});
+      res.render('article/showAll', {article});
     });  
   
 });

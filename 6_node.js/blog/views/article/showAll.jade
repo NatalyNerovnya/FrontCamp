@@ -1,9 +1,6 @@
 extends ../layout
 
-each article in articles
-    block content
-        div(class="articleBox")
-          span(class='articleDate') #{article.publishDate.toDateString()}
-          h2(class='articleTitle') #{article.title} 
-          p #{article.text}
-
+block content
+    if articles !== undefined
+        each article in articles
+            include showArticle

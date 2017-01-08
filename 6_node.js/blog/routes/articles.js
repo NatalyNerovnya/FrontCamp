@@ -7,8 +7,7 @@ var articleCtrl = require('../controllers/article');
 var upload = multer({ dest: 'public/uploads' });
 
 router.get('/add', function(req, res, next) {
-  res.render('article/addArticle', {
-      
+  res.render('article/addArticle', {     
     });
 });
 
@@ -19,26 +18,22 @@ router.post('/add',upload.single('picture'), function(req, res, next) {
         author: req.body.author
   })
   .then((idArticle) => {
-    //res.redirect('/articles/getAll');
     res.redirect('/articles/' + idArticle);
   })      
   
 });
 
 router.get('/getAll', function(req, res, next) {
-  console.log("now it's ok");
   articleCtrl.getAll()
   .then((articles) => {
+    console.log(articles);
     res.render('article/showAll', {articles});
   });
 });
 
 router.get('/:articleId', function(req, res, next) {
-console.log("not bad");
-  articleCtrl.getById("587206e71647491c0c161ba1")
+  articleCtrl.getById(req.params['articleId'])
   .then((article) => {
-    console.log(article);
-    alert(article);
     res.render('article/showArticle', {article});
   });
 });
@@ -48,11 +43,29 @@ router.get('/edit/:articleId', function(req, res, next) {
   articleCtrl.getById(req.params['articleId'])
   .then((article) => {
     renderObject['article'] = article;
+    res.render('article/editArticle', {renderObject})
   })
 });
 
 
-router.post('/edit', function(req, res, next) {
+router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
+  articleCtrl.edit({
+        title: req.body.title,
+        text: req.body.text
+  }, req.body.id);
+
+  articleCtrl.getById(req.body.id)
+    .then((article) => {
+      res.render('article/showArticle', {article});
+    });  
+  
+});
+
+router.get('/:articleId', function(req, res, next) {
+  articleCtrl.getById(req.params['articleId'])
+  .then((article) => {
+    res.render('article/showArticle', {article});
+  });
 });
 
 module.exports = router;

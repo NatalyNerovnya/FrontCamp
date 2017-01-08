@@ -1,8 +1,9 @@
 extends ../layout
 
-each article, i in articles
-    block content    
-	    div(class='articleBox')
-	      span(class='articleDate') #{article.publishDate}
-	      h2(class='articleTitle') #{article.title} 
-	      p #{article.text}
+each article in articles
+    block content
+        div(class="articleBox")
+          span(class='articleDate') #{article.publishDate.toDateString()}
+          h2(class='articleTitle') #{article.title} 
+          p #{article.text}
+

@@ -3,7 +3,8 @@ var Article = require('../models/Article');
 module.exports = {
     add: function(articleModel) {
         return new Promise(function (resolve, reject) {
-
+            if (articleModel.author === "")
+                articleModel.author = "Unknown";
             var article = new Article
                 ({
                     title: articleModel.title,
@@ -24,8 +25,11 @@ module.exports = {
     },
 
     getAll: function() {
-        console.log("getall in controller");
-        return Article.find();
+        return Article.find({}, function(err, docs){
+            if (err) {
+                console.log(err);
+            }
+        });
     },
 
     getById: function(articleId) {
@@ -43,9 +47,20 @@ module.exports = {
         })
     },
 
-    update: function(article) {
+    edit: function(articleModel, id) {
+
+        var article = {
+                    text: articleModel.text
+                }; 
         
+        console.log(id);
+
+        Article.update({"_id" : id},{ $set: article}, function (err, savedArticle) {
+            if (err) {
+                console.log(err);
+            } 
+        });
     }
 
-}
+};
 

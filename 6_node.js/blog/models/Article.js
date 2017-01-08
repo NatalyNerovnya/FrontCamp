@@ -14,8 +14,7 @@ var articleSchema = new mongoose.Schema({
         default: new Date().toLocaleDateString()
     },
     author: {
-        type: String,
-        default: "Unknown"
+        type: String
     }
 });
 

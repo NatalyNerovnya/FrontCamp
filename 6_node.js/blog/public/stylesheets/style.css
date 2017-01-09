@@ -3,10 +3,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
-
 .addForm {
   width: 50%;
   margin: 0 auto;
@@ -41,13 +37,33 @@ a {
     width: 104.1%;
 }
 
+.btn {
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+  padding: .7em 1.5em;
+  width: 15%;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  display: block;
+  height: 20px;
+  text-align: center;
+} 
+.btn.edit:hover { background: rgb(75, 122, 198); } 
+.btn.edit:active { background: rgb(0, 69, 181); } 
+.btn.edit { background: rgb(2, 87, 224); }
+
+.btn.delete:hover { background: rgb(232,95,76); } 
+.btn.delete:active { background: rgb(152,15,0); } 
+.btn.delete { background: rgb(212,75,56); }
+
 .btnAdd {
-    width: 15%;
+    color: #fff;
     font-size: 16px;
     margin: 0 0 20px 0;
+    padding: .7em 3.7em;
     display: block;
-    height: 40px;
-    box-shadow: 6px 6px 9px rgba(0,0,0, 0.4);
+    background: rgb(0, 160, 58);
 }
 
 .articleBox{

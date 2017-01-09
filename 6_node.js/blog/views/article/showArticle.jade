@@ -1,10 +1,6 @@
 extends ../layout
 
-block content    
-    div(class='articleBox')
-      span(class='articleDate') #{article.author}, #{article.publishDate.toDateString()}
-      h2(class='articleTitle') #{article.title} 
-      p #{article.text} 
-      a.btn.edit(href='/articles/edit/#{article._id}') Edit
+block content
+    include showArticleTemplate
 
       

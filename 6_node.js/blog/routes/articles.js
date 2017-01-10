@@ -12,12 +12,11 @@ router.get('/add', function(req, res, next) {
 });
 
 router.post('/add', upload.single('picture'), function(req, res, next) {
-  console.log(req.file.destination);
   articleCtrl.add({
         title: req.body.title,
         text: req.body.text,
         author: req.body.author,
-        imageUrl: req.file.originalname
+        imageUrl: req.file.filename
   })
   .then((idArticle) => {
     res.redirect('/articles/' + idArticle);

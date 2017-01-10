@@ -2,5 +2,6 @@ block content
     div(class='articleBox')
       span(class='articleDate') #{article.author}, #{article.publishDate.toDateString()}
       h2(class='articleTitle') #{article.title} 
+      img.blogImg(src='/uploads/#{article.imageUrl}')
       p #{article.text} 
       a.btn.edit(href='/articles/edit/#{article._id}') Edit

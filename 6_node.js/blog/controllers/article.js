@@ -10,7 +10,8 @@ module.exports = {
                     title: articleModel.title,
                     text: articleModel.text,
                     publishDate: articleModel.publishDate || new Date().toLocaleDateString(),
-                    author: articleModel.author
+                    author: articleModel.author,
+                    imageUrl: articleModel.imageUrl
                 }); 
 
                 article.save(function (err, savedArticle) {

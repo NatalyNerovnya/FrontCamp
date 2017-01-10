@@ -15,6 +15,10 @@ var articleSchema = new mongoose.Schema({
     },
     author: {
         type: String
+    },
+    imageUrl: {
+        type: String,
+        required: true
     }
 });
 

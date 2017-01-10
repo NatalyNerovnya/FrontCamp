@@ -9,6 +9,10 @@ body {
   background-color: #a7f99a;
 }
 
+.blogImg{
+    margin: 0 20%;
+}
+
 .container{
     position: absolute;
     top: 450px;
@@ -88,8 +92,9 @@ body {
 .articleDate{
 
 }
-.articleBox .articleImg{
+.articleBox{
     width: 100%;
+    margin: 5% 0;
 }
 
 .articleBox .articleDate{

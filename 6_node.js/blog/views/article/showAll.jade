@@ -2,5 +2,6 @@ extends ../layout
 
 block content
     if articles !== undefined
-        each article in articles
+        .container
+          each article in articles
             include showArticleTemplate

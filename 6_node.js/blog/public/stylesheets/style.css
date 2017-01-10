@@ -3,7 +3,22 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-.header a{ margin: 2% auto;}
+.header{
+  height: 500px;
+  width: 100%;
+  background-color: #a7f99a;
+}
+
+.container{
+    position: absolute;
+    top: 450px;
+    background-color: #fff;
+    margin: 0 20%;
+    padding: 15px;
+    width: 50%;
+}
+
+.nav a{ margin: 2% auto;}
 .addForm {
   width: 50%;
   margin: 0 auto;
@@ -67,18 +82,16 @@ body {
     background: rgb(0, 160, 58);
 }
 
-.articleBox{
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 8px;
-    padding: 0 30px 8px;
-    box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
-    border: 1px solid #cfcfcf;
-    white-space: pre-line;
+.articleTitle{
+  text-align: center;
+}
+.articleDate{
+
 }
 .articleBox .articleImg{
     width: 100%;
 }
+
 .articleBox .articleDate{
     float: right;
     font-size: 12px;

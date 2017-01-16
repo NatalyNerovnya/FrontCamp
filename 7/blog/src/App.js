@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.changeRoute = this.changeRoute.bind(this);
-    this.state = {route: "articles"};
+    this.state = {route: "articles", articles : []};
   }
 
   changeRoute({route, selectedArticleId}){

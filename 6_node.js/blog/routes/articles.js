@@ -18,35 +18,23 @@ router.post('/add', upload.single('picture'), function(req, res, next) {
         author: req.body.author,
         imageUrl: req.file.filename
   })
-  .then((idArticle) => {
-    res.redirect('/articles/' + idArticle);
-  })      
+  .then(idArticle => res.redirect('/articles/' + idArticle))      
   
 });
 
 router.get('/getAll', function(req, res, next) {
   articleCtrl.getAll()
-  .then((articles) => {
-    res.render('article/showAll', {articles});
-  });
-});
-
-router.get('/:articleId', function(req, res, next) {
-  articleCtrl.getById(req.params['articleId'])
-  .then((article) => {
-    res.render('article/showArticle', {article});
-  });
+  .then(articles => res.render('article/showAll', {articles}));
 });
 
 router.get('/edit/:articleId', function(req, res, next) {
   var renderObject = {};
   articleCtrl.getById(req.params['articleId'])
-  .then((article) => {
+  .then(article => {
     renderObject['article'] = article;
     res.render('article/editArticle', {renderObject})
   })
 });
-
 
 router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
   articleCtrl.edit({
@@ -55,33 +43,29 @@ router.post('/edit/edit',upload.single('picture'), function(req, res, next) {
   }, req.body.id);
 
   articleCtrl.getById(req.body.id)
-    .then((article) => {
-      res.render('article/showArticle', {article});
-    });  
-  
+    .then(article => res.render('article/showArticle', {article}))  
 });
 
 router.get('/delete/:articleId', function(req, res, next) {
   articleCtrl.remove(req.params['articleId']);
 
   articleCtrl.getAll()
-    .then((articles) => {
-      res.render('article/showAll', {articles});
-    }); 
-  
+    .then(articles => res.render('article/showAll', {articles}))  
 });
 
+router.get('/getArticle/:articleId', function(req, res, next) {
+  return articleCtrl.getById(req.params['articleId'])
+  .then(result => res.json(result));
+});
 
-router.post('/getArticle',upload.single('picture'), function(req, res, next) {
-  var article = articleCtrl.getById(req.body.id)
-    res.body.article = article;  
+router.get('/getArticles', function(req, res, next) {
+  return articleCtrl.getAll()
+  .then(articles => res.json(articles));
 });
 
 router.get('/:articleId', function(req, res, next) {
   articleCtrl.getById(req.params['articleId'])
-  .then((article) => {
-    res.render('article/showArticle', {article});
-  });
+  .then(article => res.render('article/showArticle', {article}));
 });
 
 module.exports = router;

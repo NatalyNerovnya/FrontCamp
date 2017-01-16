@@ -4,20 +4,20 @@ import Article from './components/Article/Article';
 import Articles from './components/Articles/Articles';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.changeRoute = this.changeRoute.bind(this);
-    this.state = {route: "articles", articles : []};
+    this.state = { route: "articles", articles: [] };
   }
 
-  changeRoute({route, selectedArticleId}){
-    this.setState({route, selectedArticleId});
+  changeRoute({route, selectedArticleId}) {
+    this.setState({ route, selectedArticleId });
   }
-  
+
   render() {
-    return this.state.route === "article" ? 
-     <Article globalState={this.state} changeRoute={this.changeRoute} /> : 
-     <Articles globalState={this.state} changeRoute={this.changeRoute} />    
+    return this.state.route === "article" ?
+      <Article globalState={this.state} changeRoute={this.changeRoute} /> :
+      <Articles globalState={this.state} changeRoute={this.changeRoute} />
   }
 }
 

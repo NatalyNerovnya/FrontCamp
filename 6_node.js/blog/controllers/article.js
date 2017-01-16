@@ -9,7 +9,7 @@ module.exports = {
                 ({
                     title: articleModel.title,
                     text: articleModel.text,
-                    publishDate: articleModel.publishDate || new Date().toLocaleDateString(),
+                    publishDate: articleModel.publishDate.toDateString() || new Date().toDateString(),
                     author: articleModel.author,
                     imageUrl: articleModel.imageUrl
                 }); 

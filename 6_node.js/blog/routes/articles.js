@@ -71,6 +71,12 @@ router.get('/delete/:articleId', function(req, res, next) {
   
 });
 
+
+router.post('/getArticle',upload.single('picture'), function(req, res, next) {
+  var article = articleCtrl.getById(req.body.id)
+    res.body.article = article;  
+});
+
 router.get('/:articleId', function(req, res, next) {
   articleCtrl.getById(req.params['articleId'])
   .then((article) => {

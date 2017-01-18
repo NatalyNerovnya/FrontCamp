@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Article from './components/Article/Article';
 import Articles from './components/Articles/Articles';
+import EditArticle from './components/EditArticle/EditArticle'
+import AddArticle from './components/AddArticle/AddArticle'
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +17,14 @@ class App extends Component {
   }
 
   render() {
-    return this.state.route === "article" ?
-      <Article globalState={this.state} changeRoute={this.changeRoute} /> :
-      <Articles globalState={this.state} changeRoute={this.changeRoute} />
+     if(this.state.route === "article")
+        return <Article globalState={this.state} changeRoute={this.changeRoute} /> 
+      else if(this.state.route === "editArticle")
+        return <EditArticle globalState={this.state} changeRoute={this.changeRoute} />
+      else if(this.state.route === "addArticle")
+        return <AddArticle globalState={this.state} changeRoute={this.changeRoute} />
+      else
+        return <Articles globalState={this.state} changeRoute={this.changeRoute} />
   }
 }
 

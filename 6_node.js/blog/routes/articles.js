@@ -33,14 +33,20 @@ router.post('/addArticle', upload.single('picture'), function(req, res, next) {
         author: req.body.author,
         imageUrl: req.body.filename
   })     
+  res.json("ok!");
 });
 
 router.post('/editArticle', upload.single('picture'), function(req, res, next) {
   articleController.edit({
         title: req.body.title,
         text: req.body.text
-  }, req.body.id).then(()=>res.json('success'));
-  
+  }, req.body.id);
+  res.json("ok!");
+});
+
+router.post('/deleteArticle', function(req, res, next) {
+  articleController.remove(req.body.id);
+  res.json("ok!");
 });
 
 router.get('/getAll', function(req, res, next) {

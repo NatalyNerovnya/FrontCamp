@@ -7,6 +7,7 @@ class EditArticle extends Component {
         this.id = props.globalState.selectedArticleId;
         this.sendData = this.sendData.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.deleteArticle = this.deleteArticle.bind(this);
         this.changeRoute = props.changeRoute;
         this.state = {
             article: {
@@ -25,6 +26,19 @@ class EditArticle extends Component {
             this.setState({ article: { title: e.target.value, text: this.state.article.text } });
         else if (e.target.name === "text")
             this.setState({ article: { text: e.target.value, title: this.state.article.title } });
+    }
+    deleteArticle(e) {
+        debugger;
+        fetch('http://localhost:4000/articles/deleteArticle', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: this.id })
+        }).then(() => {
+            debugger;
+            this.changeRoute({ route: 'articles'})});
     }
     sendData(e) {
         e.preventDefault();
@@ -53,7 +67,7 @@ class EditArticle extends Component {
                     <div><textarea type='text' name='text' value={this.state.article.text} onChange={this.handleChange} /></div>
                     <button className="btnAdd" onClick={this.sendData}>Save</button>
                 </form>
-                <a className="btn delete" href="">Delete</a>
+                <a className="btn delete" onClick={this.deleteArticle}>Delete</a>
             </div>
         )
     }

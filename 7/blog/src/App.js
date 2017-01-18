@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   changeRoute({route, selectedArticleId}) {
+    debugger;
     this.setState({ route, selectedArticleId });
   }
 

@@ -16,10 +16,8 @@ class AddArticle extends Component {
     handleFileChange(fileInput) { 
         let file = fileInput.currentTarget.files[0];
         this.setState({ picture : file });
-       debugger;
     }
     sendData(e) {
-        debugger;
         e.preventDefault();
         var formData;
         formData = new FormData();
@@ -31,7 +29,6 @@ class AddArticle extends Component {
             method: 'POST',
             body: formData
         }).then(() => {
-            debugger;
             this.changeRoute({ route: 'articles'})});
     }
     render() {

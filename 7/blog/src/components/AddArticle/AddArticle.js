@@ -7,35 +7,32 @@ class AddArticle extends Component {
         this.sendData = this.sendData.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
+        this.changeRoute = props.changeRoute;
         this.state = {}
-        this.formData = new FormData();
     }
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
-    handleFileChange(fileInput) {
-       var file = fileInput.currentTarget.files[0];
-       this.formData.append('picture', fileInput.currentTarget.files[0], 'file');
+    handleFileChange(fileInput) { 
+        let file = fileInput.currentTarget.files[0];
+        this.setState({ picture : file });
        debugger;
     }
     sendData(e) {
         debugger;
         e.preventDefault();
+        var formData;
+        formData = new FormData();
+        formData.append('title', this.state.title);
+        formData.append('text', this.state.text);
+        formData.append('author', this.state.author);
+        formData.append('picture', this.state.picture);
         fetch('http://localhost:4000/articles/addArticle', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            data: this.formData,
-            body: JSON.stringify({
-                title: this.state.title,
-                text: this.state.text,
-                author: this.state.author,
-                filename: this.state.picture,
-            })
-        })
-        debugger;
+            body: formData
+        }).then(() => {
+            debugger;
+            this.changeRoute({ route: 'articles'})});
     }
     render() {
         return (

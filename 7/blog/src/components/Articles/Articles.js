@@ -29,7 +29,7 @@ class Articles extends Component {
             <a className="btn edit" onClick={this.addArticle}>Add new article</a>
                 {this.state.articles.map(article =>
                     <div className="articleBox" key={article._id}>
-                        <span className="articleDate">{article.publishDate}, {article.author}</span>
+                        <span className="articleDate">{article.author}, {new Date(article.publishDate).toDateString()}</span>
                         <h2 className="articleTitle" data-id={article._id} onClick={this.selectArticle}>{article.title}</h2>
                         <img className="blogImg" src={`http://localhost:4000/uploads/${article.imageUrl}`} role="presentation" />
                     </div>

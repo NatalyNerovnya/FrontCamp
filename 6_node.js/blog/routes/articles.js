@@ -23,15 +23,11 @@ router.post('/add', upload.single('picture'), function(req, res, next) {
 });
 
 router.post('/addArticle', upload.single('picture'), function(req, res, next) {
-  console.log("I'M HERE");
-  console.log(req.body);
-  console.log(req.file);
-  console.log(req.data);
   articleController.add({
         title: req.body.title,
         text: req.body.text,
         author: req.body.author,
-        imageUrl: req.body.filename
+        imageUrl: req.file.filename
   })     
   res.json("ok!");
 });

@@ -20,15 +20,15 @@ class Article extends Component {
     }
     componentDidMount() {
         fetch(`http://localhost:4000/articles/getArticle/${this.id}`)
-            .then(response => {debugger; return response.json()})
+            .then(response => response.json())
             .then(data => this.setState({ article: data }));
     }
     render() {
         return (
             <div className="articleBox" key={this.state.article._id}>
-                <span className="articleDate">{this.state.article.author}, {this.state.article.publishDate}</span>
+                <span className="articleDate">{this.state.article.author}, {new Date(this.state.article.publishDate).toDateString()}</span>
                 <h2 className="articleTitle">{this.state.article.title}</h2>
-                <img className="blogImg" src="http://localhost:4000/uploads/2fbf5123716d1677457f4dca67386e42" role="presentation" />
+                <img className="blogImg" src={`http://localhost:4000/uploads/${this.state.article.imageUrl}`} role="presentation" />
                 <p>{this.state.article.text}</p>
                 <a className="btn edit" onClick={this.changeRoute.bind({ route: "articles" })}>Return to all</a>
                 <a className="btn edit" data-id={this.id} onClick={this.editArticle}>Edit</a>

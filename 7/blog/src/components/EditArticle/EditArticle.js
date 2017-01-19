@@ -28,7 +28,6 @@ class EditArticle extends Component {
             this.setState({ article: { text: e.target.value, title: this.state.article.title } });
     }
     deleteArticle(e) {
-        debugger;
         fetch('http://localhost:4000/articles/deleteArticle', {
             method: 'POST',
             headers: {
@@ -36,9 +35,7 @@ class EditArticle extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ id: this.id })
-        }).then(() => {
-            debugger;
-            this.changeRoute({ route: 'articles'})});
+        }).then(() => this.changeRoute({ route: 'articles'}));
     }
     sendData(e) {
         e.preventDefault();

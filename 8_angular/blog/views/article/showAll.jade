@@ -1,0 +1,7 @@
+extends ../layout
+
+block content
+    if articles !== undefined
+        .container
+          each article in articles
+            include showArticleTemplate

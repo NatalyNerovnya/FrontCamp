@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  div(class='addForm')
+    h2 Add Article
+    form(method='POST', action='add', enctype='multipart/form-data')
+      div(class='inputName') Title:
+      div
+        input(type='text', name='title')
+      div(class='inputName') Author:
+      div
+        input(type='text', name='author')  
+      div(class='inputName') Text:
+      div
+        textarea(type='text', name='text')
+      div(class='inputName') Picture:
+      div
+        input(type='file', name='picture')
+      button.btnAdd Add

@@ -1,0 +1,22 @@
+<form ng-submit="$articleAddCtrl.addEditArticleForm.$valid && articleAddCtrl.add()" name="articleAddCtrl.addEditArticleForm" novalidate="novalidate">
+    <div>Title:</div>
+    <div>
+        <input type="text" ng-model="articleAddCtrl.article.title" ng-required="true" name="title" />
+        <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.title.$invalid && (articleAddCtrl.addEditArticleForm.title.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Title is required!</span>
+    </div>
+    <div>Author:</div>
+    <div>
+        <input type="text" ng-model="articleAddCtrl.article.author" />
+    </div>
+    <div>Text:</div>
+    <div>
+        <textarea type="text" ng-model="articleAddCtrl.article.text" ng-required="true" name="text"></textarea>
+        <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.text.$invalid && (articleAddCtrl.addEditArticleForm.text.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Text is required!</span>
+    </div>
+    <div>Picture:</div>
+    <div>
+        <input type="file" ng-model="articleAddCtrl.article.picture" ng-required="true" name="picture" />
+        <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.picture.$invalid && (articleAddCtrl.addEditArticleForm.picture.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Picture is required!</span>
+    </div>
+    <button type="submit">Add</button>
+</form>

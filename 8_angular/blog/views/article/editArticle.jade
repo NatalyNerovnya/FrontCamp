@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  .container
+    div(class='addForm')
+      h2 Edit Article
+      form(method='POST', action='edit', enctype='multipart/form-data')
+        div(class='inputName') Title:
+        div
+          input(type='text', name='title', value='#{renderObject.article.title}')
+        div(class='inputName') Content:
+        div
+          textarea(type='text', name='text') #{renderObject.article.text}
+          input(type='hidden' name='id' value='#{renderObject.article._id}')
+        button.btnAdd Save
+      a.btn.delete(href='/articles/delete/#{renderObject.article._id}') Delete

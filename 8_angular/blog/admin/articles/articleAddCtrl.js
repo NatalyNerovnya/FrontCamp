@@ -6,12 +6,12 @@ export class ArticleAddCtrl {
     };
 
     save() {
+        debugger;
         var fd = new FormData();
         for (var key in this.article) {
             fd.append(key, this.article[key]);
         }
         this.articleService.create({}, fd).$promise.then(() => {
-            debugger;
             this.$location.path("/");
         })
     }

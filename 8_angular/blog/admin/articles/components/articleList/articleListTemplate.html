@@ -1,4 +1,12 @@
 <p>Number of articles: <span ng-bind="$ctrl.articles.length"></span></p>
-<ul ng-repeat="article in $ctrl.articles">
-    <li ng-bind="article.title"></li>
-</ul>
+<md-raised-button ng-click="$ctrl.addNew();" class="btn edit"> Add new </md-raised-button>
+<div class="container">
+    <div class="articleBox" ng-repeat="article in $ctrl.articles | limitTo: $ctrl.page * 3">
+        <a ng-href="/admin/{{article._id}}">
+            <h2 class="articleTitle" ng-bind="article.title"></h2>
+        </a>
+        <img class="blogImg" ng-src="http://localhost:4000/uploads/{{article.imageUrl}}" />
+    </div>
+</div>
+
+<pagination-component page="$ctrl.page" ng-show="$ctrl.page *  3 < $ctrl.articles.length"></pagination-component>

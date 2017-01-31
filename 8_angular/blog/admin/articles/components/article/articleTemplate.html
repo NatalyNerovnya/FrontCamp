@@ -1,0 +1,7 @@
+<div class="articleBox" >
+    <h2 class="articleTitle" ng-bind="$ctrl.article.title"></h2>
+    <img class="blogImg" ng-src="http://localhost:4000/uploads/{{$ctrl.article.imageUrl}}" />
+    <p ng-bind="$ctrl.article.text"></p>
+    <a class="btn edit" ng-click="$ctrl.showAll()">Return to all</a>
+    <a class="btn edit" ng-click="$ctrl.edit()">Edit</a>
+</div>

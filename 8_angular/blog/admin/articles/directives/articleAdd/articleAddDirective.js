@@ -4,7 +4,8 @@ export const articleAddDirective = () => {
     return {
         scope: {
             article: '=',
-            save: '&'
+            save: '&',
+            editMode: '<'
         },
         restrict: 'E',
         template: require('./articleAddTemplate.html'),

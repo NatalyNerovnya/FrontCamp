@@ -191,7 +191,6 @@ var home =
 	        value: function save() {
 	            var _this = this;
 
-	            debugger;
 	            var fd = new FormData();
 	            for (var key in this.article) {
 	                fd.append(key, this.article[key]);

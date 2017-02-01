@@ -1,0 +1,26 @@
+<div class='addForm'>
+    <form ng-submit="articleAddCtrl.addEditArticleForm.$valid && articleAddCtrl.add()" name="articleAddCtrl.addEditArticleForm" novalidate="novalidate">
+        <div class='inputName'>Title:</div>
+        <div>
+            <input type="text" ng-model="articleAddCtrl.article.title" ng-required="true" name="title" />
+            <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.title.$invalid && (articleAddCtrl.addEditArticleForm.title.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Title is required!</span>
+        </div>
+        <div class='inputName' ng-if="!articleAddCtrl.editMode">Author:</div>
+        <div ng-if="!articleAddCtrl.editMode">
+            <input type="text" ng-model="articleAddCtrl.article.author" />
+        </div>
+        <div class='inputName'>Text:</div>
+        <div>
+            <textarea type="text" ng-model="articleAddCtrl.article.text" ng-required="true" name="text" text-validation></textarea>
+            <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.text.$invalid && (articleAddCtrl.addEditArticleForm.text.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Text must contain at least 20 symbols!</span>
+            
+        </div>
+        <div class='inputName' ng-if="!articleAddCtrl.editMode">Picture:</div>
+        <div ng-if="!articleAddCtrl.editMode">
+            <input type="file" ng-model="articleAddCtrl.article.picture" name="picture" />
+            <span style="color: red" ng-show="articleAddCtrl.addEditArticleForm.picture.$invalid && (articleAddCtrl.addEditArticleForm.picture.$dirty || articleAddCtrl.addEditArticleForm.$submitted)">Picture is required!</span>
+        </div>
+        <button type="submit" class="btnAdd" ng-if="!articleAddCtrl.editMode">Add</button>
+        <button type="submit" class="btnAdd" ng-if="articleAddCtrl.editMode">Save</button>
+    </form>
+</div>

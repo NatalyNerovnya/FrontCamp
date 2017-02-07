@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack && supervisor ./bin/www",
-    "test-debug": "karma start --browsers Chrome --single-run false --debug"
+    "test-debug": "karma start --debug"
   },
   "dependencies": {
     "angular": "^1.6.1",
@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.6.1",
+    "angular-resource": "^1.6.1",
+    "angular-route": "^1.6.1",
     "async": "^2.1.4",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",

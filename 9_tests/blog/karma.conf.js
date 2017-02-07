@@ -4,17 +4,19 @@
 
 module.exports = function (config) {
 
-  	var sourcePreprocessors = 'coverage';
-	function isDebug(argument) {
-		return argument === '--debug';
-	}
-	if (process.argv.some(isDebug)) {
-		sourcePreprocessors = [];
-	}
-  
-  config.set({
+  var sourcePreprocessors = ['webpack', 'coverage'];
+  var sourceReporters = ['progress', 'coverage']
 
-    
+  function isDebug(argument) {
+    return argument === '--debug';
+  }
+
+  if (process.argv.some(isDebug)) {
+    sourcePreprocessors = ['webpack'];
+    sourceReporters = ['progress'];
+  }
+
+  config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -26,6 +28,11 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'node_modules/angular/angular.js',
+      'node_modules/angular-route/angular-route.js',
+      'node_modules/angular-resource/angular-resource.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'admin/admin.js',
       'test/test_index.js'
     ],
 
@@ -37,23 +44,32 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/test_index.js': ['webpack'/*, 'coverage'*/]
+      'admin/admin.js': sourcePreprocessors,
+      'test/test_index.js': sourcePreprocessors
     },
 
     webpack: {
 
-            module: {
-                loaders: [{
-                    test: /\.js$/,
-                    loader: 'babel',
-                }]
-            }
-        },
+      module: {
+        loaders: [{
+          test: /\.js$/,
+          loader: 'babel',
+        }, {
+          loader: "style-loader!css-loader!less-loader",
+          test: /\.less$/,
+        }
+          , {
+          test: /\.html$/,
+          loader: 'raw-loader'
+        }],
+      },
+      noParse: /angular\/angular.js/
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'/*, 'coverage'*/],
+    reporters: sourceReporters,
 
 
     // web server port

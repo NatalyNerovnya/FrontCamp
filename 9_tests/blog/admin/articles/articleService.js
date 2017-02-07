@@ -1,6 +1,5 @@
 export const ArticleService = $resource => {
     let url = '/articles/:articleId';
-    // let params = {styleId: '@styleId', dealerZipe: '@dealerZip'        };
     return $resource(url, { articleId: '@id' }, {
         create: {
             method: "POST",

@@ -1,3 +1,4 @@
+var home =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -46,6 +47,10 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _articlesModule = __webpack_require__(1);
 
 	var _articlesModule2 = _interopRequireDefault(_articlesModule);
@@ -54,7 +59,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var adminApp = angular.module('adminApp', ['ngRoute', _articlesModule2.default.name]).config(["$routeProvider", "$locationProvider", _routes.routes]);;
+	var adminApp = angular.module('adminApp', ['ngRoute', _articlesModule2.default.name]).config(["$routeProvider", "$locationProvider", _routes.routes]);
+
+	exports.default = adminApp;
 
 /***/ },
 /* 1 */
@@ -266,7 +273,6 @@
 	});
 	var ArticleService = exports.ArticleService = function ArticleService($resource) {
 	    var url = '/articles/:articleId';
-	    // let params = {styleId: '@styleId', dealerZipe: '@dealerZip'        };
 	    return $resource(url, { articleId: '@id' }, {
 	        create: {
 	            method: "POST",

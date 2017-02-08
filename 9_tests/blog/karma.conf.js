@@ -1,11 +1,11 @@
 // Karma configuration
 // Generated on Wed Feb 01 2017 13:54:10 GMT+0300 (Belarus Standard Time)
-
+var path = require("path");
 
 module.exports = function (config) {
 
   var sourcePreprocessors = ['webpack', 'coverage'];
-  var sourceReporters = ['progress', 'coverage']
+  var sourceReporters = ['progress', 'istanbul']
 
   function isDebug(argument) {
     return argument === '--debug';
@@ -45,11 +45,10 @@ module.exports = function (config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'admin/admin.js': sourcePreprocessors,
-      'test/test_index.js': sourcePreprocessors
+      'test/test_index.js': ['webpack']
     },
 
     webpack: {
-
       module: {
         loaders: [{
           test: /\.js$/,
@@ -62,7 +61,14 @@ module.exports = function (config) {
           test: /\.html$/,
           loader: 'raw-loader'
         }],
+
+        postLoaders: [{ //delays coverage til after tests are run, fixing transpiled source coverage error
+          test: /\.js$/,
+          loader: 'istanbul-instrumenter',
+          include: path.resolve('admin/'),
+        }]
       },
+
       noParse: /angular\/angular.js/
     },
 
@@ -70,6 +76,14 @@ module.exports = function (config) {
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: sourceReporters,
+
+    istanbulReporter: {
+      dir: 'coverage',
+      reporters: [
+        { type: 'html', subdir: '.' },
+        { type: 'text' }
+      ]
+    },
 
 
     // web server port
